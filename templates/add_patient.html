@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/add_patient.css">
+    <title>Add Patient</title>
+</head>
+<body>
+    <header>
+        <h1>Add New Patient</h1>
+    </header>
+    <main>
+        <div class="container">
+            <form method="POST" class="patient-form">
+                <label>Student Number:</label>
+                <input type="text" name="student_number" required><br>
+                <label>Name:</label>
+                <input type="text" name="name" required><br>
+                <label>Course/Section:</label>
+                <input type="text" name="cys" required><br>
+                <label>Date of Birth:</label>
+                <input type="date" name="dob" required><br>
+                <label>Age:</label>
+                <input type="number" name="age" required><br>
+                <label>Sex:</label>
+                <input type="text" name="sex" required><br>
+                <label>Emergency Phone:</label>
+                <input type="text" name="emergency_phone" required><br>
+                <label>Emergency Email:</label>
+                <input type="email" name="emergency_email" required><br>
+                <label>Health Condition:</label>
+                <input type="text" name="health_condition" required><br>
+                <label>Medication Name:</label>
+                <input type="text" name="medication_name" required><br>
+                <label>Prescriber:</label>
+                <input type="text" name="prescriber" required><br>
+                <label>Date of Visit:</label>
+                <input type="date" name="visit_date" required><br>
+                <button type="submit" class="submit-button">Add Patient</button>
+            </form>
+            <a href="{{ url_for('index') }}" class="back-link">Back to Main Menu</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Medika. All rights reserved.</p>
+    </footer>
+</body>
+</html>

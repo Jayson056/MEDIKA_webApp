@@ -1,0 +1,70 @@
+<!-- templates/update.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Patient Record</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='update.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Update Patient Record</h2>
+        <form action="{{ url_for('update_patient', student_number=patient['student_number']) }}" method="POST">
+            <div class="form-group">
+                <label for="student_number">Student ID:</label>
+                <input type="text" id="student_number" name="student_number" value="{{ patient['student_number'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" value="{{ patient['name'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="cys">Course/Section:</label>
+                <input type="text" id="cys" name="cys" value="{{ patient['cys'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" value="{{ patient['dob'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" value="{{ patient['age'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex" required>
+                    <option value="Male" {{ 'selected' if patient['sex'] == 'Male' else '' }}>Male</option>
+                    <option value="Female" {{ 'selected' if patient['sex'] == 'Female' else '' }}>Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="emergency_phone">Emergency Phone:</label>
+                <input type="text" id="emergency_phone" name="emergency_phone" value="{{ patient['emergency_phone'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="emergency_email">Emergency Email:</label>
+                <input type="email" id="emergency_email" name="emergency_email" value="{{ patient['emergency_email'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="health_condition">Health Condition:</label>
+                <input type="text" id="health_condition" name="health_condition" value="{{ patient['health_condition'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="medication_name">Medication Name:</label>
+                <input type="text" id="medication_name" name="medication_name" value="{{ patient['medication_name'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="prescriber">Prescriber:</label>
+                <input type="text" id="prescriber" name="prescriber" value="{{ patient['prescriber'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="visit_date">Date of Visit:</label>
+                <input type="date" id="visit_date" name="visit_date" value="{{ patient['visit_date'] }}" required>
+            </div>
+            <button type="submit" class="btn">Update</button>
+        </form>
+    </div>
+</body>
+</html>

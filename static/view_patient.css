@@ -1,0 +1,196 @@
+/* static/view_patient.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #89cff0, #5bc0eb, #006994);
+    background-size: 400% 400%;
+    animation: gradientAnimation 8s ease infinite;
+    color: #333;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.2); /* Transparent overlay */
+    color: #fff;
+    padding: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+header h1::before {
+    content: "📋"; /* Icon for the title */
+    font-size: 1.5em;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+header .back-link {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #004d66;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+header .back-link:hover {
+    background-color: #003d5c;
+    transform: translateY(-3px); /* Lift effect */
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+table th,
+table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #006699;
+    color: #fff;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #e6f7ff; /* Highlight on hover */
+    transition: background-color 0.3s ease;
+}
+
+.edit-link,
+.delete-link {
+    color: #006699;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.edit-link {
+    border: 1px solid #006699;
+}
+
+.edit-link:hover {
+    background-color: #006699;
+    color: #fff;
+    transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+.delete-link {
+    background-color: #d9534f; /* Red for delete */
+    border: 1px solid #d9534f;
+}
+
+.delete-link:hover {
+    background-color: #c9302c; /* Darker red */
+    transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.2); /* Transparent footer */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #006699;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #e6f2ff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: #d4ebff;
+    transform: translateY(-3px); /* Lift effect */
+}

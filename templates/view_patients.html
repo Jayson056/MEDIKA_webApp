@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/view_patient.css">
+    <title>View Patients</title>
+</head>
+<body>
+    <header>
+        <h1>Patient Records</h1>
+    </header>
+    <main>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Name</th>
+                        <th>Course/Section</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.student_number }}</td>
+                        <td>{{ patient.name }}</td>
+                        <td>{{ patient.cys }}</td>
+                        <td>
+                            <a href="{{ url_for('update_patient', student_number=patient.student_number) }}" class="edit-link">Edit</a> |
+                            <a href="{{ url_for('delete_patient', student_number=patient.student_number) }}" class="delete-link" onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('index') }}" class="back-link">Back to Main Menu</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Medika. All rights reserved.</p>
+    </footer>
+</body>
+</html>

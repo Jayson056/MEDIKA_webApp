@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Patient Record</title>
+    <link rel="stylesheet" href="/static/search.css">
+</head>
+<body>
+    <header>
+        <h1>
+            <span class="search-icon" role="img" aria-label="Search">&#128269;</span> Search Patient Record
+        </h1>
+    </header>
+
+    <main>
+        <form action="{{ url_for('search_patient') }}" method="POST">
+            <label for="student_number">Enter student number:</label>
+            <input type="text" id="student_number" name="student_number" required>
+            <button type="submit">Search</button>
+<a href="{{ url_for('index') }}" class="back-link">Back to Main Menu</a>
+        </form>
+        {% if patient %}
+            <div class="patient-details">
+                <h2>Patient Details</h2>
+                <p>Student ID: {{ patient.student_number }}</p>
+                <p>Full Name: {{ patient.name }}</p>
+                <p>Course/Section: {{ patient.cys }}</p>
+                <p>Date of Birth: {{ patient.dob }}</p>
+                <p>Age: {{ patient.age }}</p>
+                <p>Sex: {{ patient.sex }}</p>
+                <p>Emergency Phone: {{ patient.emergency_phone }}</p>
+                <p>Emergency Email: {{ patient.emergency_email }}</p>
+                <p>Health Condition: {{ patient.health_condition }}</p>
+                <p>Medication Name: {{ patient.medication_name }}</p>
+                <p>Prescriber: {{ patient.prescriber }}</p>
+                <p>Date of Visit: {{ patient.visit_date }}</p>       
+        {% else %}
+        {% endif %}
+    </main>
+</body>
+</html>

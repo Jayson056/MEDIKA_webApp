@@ -1,0 +1,36 @@
+<!-- patient_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <link rel="stylesheet" href="/static/patient_details.css">
+</head>
+<body>
+    <header>
+        <h1>
+            <span class="search-icon" role="img" aria-label="Search">🗒️</span> Patient Details
+        </h1>
+    </header>
+
+    <main>
+        <div class="patient-details">
+            <h2>Patient Details</h2>
+            <p>Student ID: {{ patient.student_number }}</p>
+            <p>Full Name: {{ patient.name }}</p>
+            <p>Course/Section: {{ patient.cys }}</p>
+            <p>Date of Birth: {{ patient.dob }}</p>
+            <p>Age: {{ patient.age }}</p>
+            <p>Sex: {{ patient.sex }}</p>
+            <p>Emergency Phone: {{ patient.emergency_phone }}</p>
+            <p>Emergency Email: {{ patient.emergency_email }}</p>
+            <p>Health Condition: {{ patient.health_condition }}</p>
+            <p>Medication Name: {{ patient.medication_name }}</p>
+            <p>Prescriber: {{ patient.prescriber }}</p>
+            <p>Date of Visit: {{ patient.visit_date }}</p>
+        </div>
+        <a href="{{ url_for('index') }}" class="back-link">Back to Main Menu</a>
+    </main>
+</body>
+</html>
