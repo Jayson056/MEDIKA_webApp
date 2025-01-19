@@ -1,70 +1,244 @@
-<!-- templates/update.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Patient Record</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='update.css') }}">
+    <title>Patient Dashboard</title>
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            margin-right: 500px;
+            background-color: #0066CC;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 62px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .sidebar a {
+            margin-top: 9;
+            margin-top: 90px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a img {
+            margin-right: 10px;
+            margin-top: 12px;
+        }
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile img {
+            width: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .profile span {
+            display: block;
+            font-weight: bold;
+        }
+
+
+        .main-content {
+            width: 79%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+.top-right-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.dots {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 10px);
+  grid-gap: 5px;
+}
+.dots span {
+  width: 10px;
+  height: 10px;
+  background-color: #1E88E5;
+  border-radius: 50%;
+}
+.patient-form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .main {
+            margin-left: -500px;
+            flex: 1;
+            background-color: #F4F6F8;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-content {
+            width: 80%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h1 {
+            font-size: 2rem;
+            color: #0066CC;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+
+        .patient-form label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .patient-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-button {
+            grid-column: span 3;
+            padding: 15px;
+            background-color: #0066CC;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .add-button:hover {
+            background-color: #0052A3;
+        }
+
+        @media (max-width: 768px) {
+            .patient-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Update Patient Record</h2>
-        <form action="{{ url_for('update_patient', student_number=patient['student_number']) }}" method="POST">
-            <div class="form-group">
-                <label for="student_number">Student ID:</label>
-                <input type="text" id="student_number" name="student_number" value="{{ patient['student_number'] }}" required>
+    <div class="sidebar">
+        <div>
+            <a href="add">
+                <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
+            </a>
+            <a href="view">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="View Icon"> View All Patient Record
+            </a>
+            <a href="search">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
+            </a>
+        </div>
+        <div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Profile Icon">
+                <span>Dr. Alex Rebuca</span>
             </div>
-            <div class="form-group">
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" value="{{ patient['name'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="cys">Course/Section:</label>
-                <input type="text" id="cys" name="cys" value="{{ patient['cys'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" value="{{ patient['dob'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" value="{{ patient['age'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="sex">Sex:</label>
-                <select id="sex" name="sex" required>
-                    <option value="Male" {{ 'selected' if patient['sex'] == 'Male' else '' }}>Male</option>
-                    <option value="Female" {{ 'selected' if patient['sex'] == 'Female' else '' }}>Female</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="emergency_phone">Emergency Phone:</label>
-                <input type="text" id="emergency_phone" name="emergency_phone" value="{{ patient['emergency_phone'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="emergency_email">Emergency Email:</label>
-                <input type="email" id="emergency_email" name="emergency_email" value="{{ patient['emergency_email'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="health_condition">Health Condition:</label>
-                <input type="text" id="health_condition" name="health_condition" value="{{ patient['health_condition'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="medication_name">Medication Name:</label>
-                <input type="text" id="medication_name" name="medication_name" value="{{ patient['medication_name'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="prescriber">Prescriber:</label>
-                <input type="text" id="prescriber" name="prescriber" value="{{ patient['prescriber'] }}" required>
-            </div>
-            <div class="form-group">
-                <label for="visit_date">Date of Visit:</label>
-                <input type="date" id="visit_date" name="visit_date" value="{{ patient['visit_date'] }}" required>
-            </div>
-            <button type="submit" class="btn">Update</button>
-        </form>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="main-content">
+            <h1>STUDENT INFORMATION</h1>
+            <form method="POST" class="patient-form">
+                <div>
+                    <label>Student Number:</label>
+                    <input type="text" name="student_number" required>
+                </div>
+                <div>
+                    <label>Course/Year/Section:</label>
+                    <input type="text" name="cys" required>
+                </div>
+                <div>
+                    <label>Date of Visit:</label>
+                    <input type="date" name="visit_date" required>
+                </div>
+                <div>
+                    <label>Last Name:</label>
+                    <input type="text" name="last_name" required>
+                </div>
+                <div>
+                    <label>First Name:</label>
+                    <input type="text" name="first_name" required>
+                </div>
+                <div>
+                    <label>Middle Initial:</label>
+                    <input type="text" name="middle_initial" required>
+                </div>
+                <div>
+                    <label>Date of Birth:</label>
+                    <input type="date" name="dob" required>
+                </div>
+                <div>
+                    <label>Age:</label>
+                    <input type="number" name="age" required>
+                </div>
+                <div>
+                    <label>Sex:</label>
+                    <input type="text" name="sex" required>
+                </div>
+                <div>
+                    <label>Health Condition:</label>
+                    <input type="text" name="health_condition" required>
+                </div>
+                <div>
+                    <label>Medication Name:</label>
+                    <input type="text" name="medication_name" required>
+                </div>
+                <div>
+                    <label>Prescriber:</label>
+                    <input type="text" name="prescriber" required>
+                </div>
+                <div>
+                    <label>Emergency Contact:</label>
+                    <input type="text" name="emergency_contact" required>
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input type="email" name="emergency_email" required>
+                </div>
+                <button type="submit" class="add-button">Add Patient</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

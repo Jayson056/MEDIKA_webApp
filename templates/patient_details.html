@@ -1,36 +1,196 @@
-<!-- patient_details.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Details</title>
-    <link rel="stylesheet" href="/static/patient_details.css">
+    <title>Patient Dashboard</title>
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            margin-right: 500px;
+            background-color: #0066CC;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 62px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .sidebar a {
+            margin-top: 9;
+            margin-top: 90px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a img {
+            margin-right: 10px;
+            margin-top: 12px;
+        }
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile img {
+            width: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .profile span {
+            display: block;
+            font-weight: bold;
+        }
+
+
+        .main-content {
+            width: 79%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+     
+
+            .content {
+            flex: 1;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px 0 0 15px;
+            margin: auto;
+        }
+
+        .content h2 {
+            margin-left: -500px;
+            color: #1e73be;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            margin-left: -500px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .details span {
+            font-weight: bold;
+        }
+
+        .save-pdf-button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #1e73be;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .save-pdf-button:hover {
+            background-color: #155a91;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #1e73be;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .dots {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 10px);
+  grid-gap: 5px;
+}
+.dots span {
+  width: 10px;
+  height: 10px;
+  background-color: #1E88E5;
+  border-radius: 50%;
+}
+
+    </style>     
 </head>
 <body>
-    <header>
-        <h1>
-            <span class="search-icon" role="img" aria-label="Search">🗒️</span> Patient Details
-        </h1>
-    </header>
-
-    <main>
-        <div class="patient-details">
-            <h2>Patient Details</h2>
-            <p>Student ID: {{ patient.student_number }}</p>
-            <p>Full Name: {{ patient.name }}</p>
-            <p>Course/Section: {{ patient.cys }}</p>
-            <p>Date of Birth: {{ patient.dob }}</p>
-            <p>Age: {{ patient.age }}</p>
-            <p>Sex: {{ patient.sex }}</p>
-            <p>Emergency Phone: {{ patient.emergency_phone }}</p>
-            <p>Emergency Email: {{ patient.emergency_email }}</p>
-            <p>Health Condition: {{ patient.health_condition }}</p>
-            <p>Medication Name: {{ patient.medication_name }}</p>
-            <p>Prescriber: {{ patient.prescriber }}</p>
-            <p>Date of Visit: {{ patient.visit_date }}</p>
+    <div class="sidebar">
+        <div>
+            <a href="add">
+                <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
+            </a>
+            <a href="view">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="View Icon"> View All Patient Record
+            </a>
+            <a href="search">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
+            </a>
         </div>
-        <a href="{{ url_for('index') }}" class="back-link">Back to Main Menu</a>
-    </main>
+        <div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Profile Icon">
+                <span>Dr. Alex Rebuca</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>Patient Details:</h2>
+        <div class="details">
+            <p><span>Student ID:</span> 12345</p>
+            <p><span>Full Name:</span> Jayson</p>
+            <p><span>Course/Section:</span> BSIT 2-3</p>
+            <p><span>Date of Birth:</span> 2001-07-05</p>
+            <p><span>Age:</span> 23</p>
+            <p><span>Sex:</span> Male</p>
+            <p><span>Emergency Phone:</span> 093838</p>
+            <p><span>Emergency Email:</span> jayson.combate05@gmail.com</p>
+            <p><span>Health Condition:</span> Good</p>
+            <p><span>Medication Name:</span> Jazzy</p>
+            <p><span>Prescriber:</span> Medika</p>
+            <p><span>Date of Visit:</span> 2024-12-19</p>
+        </div>
+        <a href="{{ url_for('generate_pdf', student_number=patient.student_number) }}" class="save-pdf-button">Save as PDF</a>
+    </div>
+
+    <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+</div>
+
 </body>
 </html>

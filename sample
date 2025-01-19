@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: #0066CC;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .sidebar a {
+            margin-top: 9;
+            margin-top: 90px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a img {
+            margin-right: 30;
+           
+        }
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile img {
+            width: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .profile span {
+            display: block;
+            font-weight: bold;
+        }
+
+        .main {
+            flex: 1;
+            background-color: #F4F6F8;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-content {
+            width: 80%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h1 {
+            font-size: 2rem;
+            color: #0066CC;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .patient-form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .patient-form label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .patient-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-button {
+            grid-column: span 3;
+            padding: 15px;
+            background-color: #0066CC;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .add-button:hover {
+            background-color: #0052A3;
+        }
+
+        @media (max-width: 768px) {
+            .patient-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div>
+            <a href="add">
+                <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
+            </a>
+            <a href="view">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="View Icon"> View All Patient Record
+            </a>
+            <a href="search">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
+            </a>
+        </div>
+        <div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Profile Icon">
+                <span>Dr. Alex Rebuca</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="main-content">
+            <h1>STUDENT INFORMATION</h1>
+            <form method="POST" class="patient-form">
+                <div>
+                    <label>Student Number:</label>
+                    <input type="text" name="student_number" required>
+                </div>
+                <div>
+                    <label>Course/Year/Section:</label>
+                    <input type="text" name="cys" required>
+                </div>
+                <div>
+                    <label>Date of Visit:</label>
+                    <input type="date" name="visit_date" required>
+                </div>
+                <div>
+                    <label>Last Name:</label>
+                    <input type="text" name="last_name" required>
+                </div>
+                <div>
+                    <label>First Name:</label>
+                    <input type="text" name="first_name" required>
+                </div>
+                <div>
+                    <label>Middle Initial:</label>
+                    <input type="text" name="middle_initial" required>
+                </div>
+                <div>
+                    <label>Date of Birth:</label>
+                    <input type="date" name="dob" required>
+                </div>
+                <div>
+                    <label>Age:</label>
+                    <input type="number" name="age" required>
+                </div>
+                <div>
+                    <label>Sex:</label>
+                    <input type="text" name="sex" required>
+                </div>
+                <div>
+                    <label>Health Condition:</label>
+                    <input type="text" name="health_condition" required>
+                </div>
+                <div>
+                    <label>Medication Name:</label>
+                    <input type="text" name="medication_name" required>
+                </div>
+                <div>
+                    <label>Prescriber:</label>
+                    <input type="text" name="prescriber" required>
+                </div>
+                <div>
+                    <label>Emergency Contact:</label>
+                    <input type="text" name="emergency_contact" required>
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input type="email" name="emergency_email" required>
+                </div>
+                <button type="submit" class="add-button">Add Patient</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+### dashboard:
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: #0066CC;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 62px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .sidebar a {
+            margin-top: 9;
+            margin-top: 90px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a img {
+            margin-right: 0px;
+            margin-top: 12px;
+        }
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile img {
+            width: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .profile span {
+            display: block;
+            font-weight: bold;
+        }
+
+
+        .main-content {
+            width: 79%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+     
+
+    
+        .Description {
+  font-size: 18px;
+  word-spacing: 3.8px;
+  line-height: 23px;
+  font-style: poppins;
+  background-color: white;
+  padding: 25px;
+  margin-top: 50px;
+  margin-right: 405px;
+  border-radius: 15px;
+}
+.Description h2 {
+  color: #1E88E5;
+  margin-top: 5px;
+}
+.top-right-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.dots {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 10px);
+  grid-gap: 5px;
+}
+.dots span {
+  width: 10px;
+  height: 10px;
+  background-color: #1E88E5;
+  border-radius: 50%;
+}
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div>
+            <a href="add">
+                <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
+            </a>
+            <a href="view">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="View Icon"> View All Patient Record
+            </a>
+            <a href="search">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
+            </a>
+        </div>
+        <div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Profile Icon">
+                <span>Dr. Alex Rebuca</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="Description">
+        <div class="main-content">
+            <h2>Description</h2>
+            <p>
+                Lorem ipsum dolor amet, consectetuer adipiscing elit. Effictur maecenas inceptos sollicitudin convallis orci quis in tristique. Sollicitudin risus facilisis; taciti duis commodo laoreet. Consectetur facilisis potenti lobortis praesent at pulvinar proin. Lorem ipsum odor amet, consectetuer adipiscing elit.
+            </p>
+    <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+###### view PATIENT DETAILS::
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 25%;
+            background-color: #1e73be;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar a:hover {
+            color: #cce4ff;
+        }
+
+        .sidebar .footer {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .content {
+            flex: 1;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px 0 0 15px;
+            margin: auto;
+        }
+
+        .content h2 {
+            color: #1e73be;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .details span {
+            font-weight: bold;
+        }
+
+        .save-pdf-button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #1e73be;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .save-pdf-button:hover {
+            background-color: #155a91;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #1e73be;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div>
+                <a href="add"><img src="user-icon.png" alt="Add" style="width:20px;"> Add Patient</a>
+                <a href="view"><img src="records-icon.png" alt="Records" style="width:20px;"> View All Patient Record</a>
+                <a href="search"><img src="search-icon.png" alt="Search" style="width:20px;"> Search Patient Record</a>
+            </div>
+            <div class="footer">
+                Dr. Alex Rebuca
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Patient Details:</h2>
+            <div class="details">
+                <p><span>Student ID:</span> 12345</p>
+                <p><span>Full Name:</span> Jayson</p>
+                <p><span>Course/Section:</span> BSIT 2-3</p>
+                <p><span>Date of Birth:</span> 2001-07-05</p>
+                <p><span>Age:</span> 23</p>
+                <p><span>Sex:</span> Male</p>
+                <p><span>Emergency Phone:</span> 093838</p>
+                <p><span>Emergency Email:</span> jayson.combate05@gmail.com</p>
+                <p><span>Health Condition:</span> Good</p>
+                <p><span>Medication Name:</span> Jazzy</p>
+                <p><span>Prescriber:</span> Medika</p>
+                <p><span>Date of Visit:</span> 2024-12-19</p>
+            </div>
+            <a href="{{ url_for('generate_pdf', student_number=patient.student_number) }}" class="save-pdf-button">Save as PDF</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+### view all patients record:
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}"> 
+    <title>Patient Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+        .sidebar {
+            background-color: #1E88E5;
+            width: 250px;
+            height: 100vh;
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .sidebar a img {
+            margin-right: 10px;
+        }
+        .sidebar .profile {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .sidebar .profile img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .logout-button {
+            background-color: #ff6f61;
+            color: white;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .logout-button:hover {
+            background-color: #e65c50;
+        }
+        .main {
+            flex: 1;
+            background-color: #F4F6F8;
+            padding: 40px;
+        }
+        .description {
+            font-size: 18px;
+            word-spacing: 3.8px;
+            line-height: 23px;
+            font-style: poppins;
+            background-color: white;
+            padding: 25px;
+            margin-top: 50px;
+            margin-right: 405px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .description h2 {
+            color: #1E88E5;
+            margin-top: 5px;
+        }
+        .top-right-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 10px);
+            grid-gap: 5px;
+        }
+        .dots span {
+            width: 10px;
+            height: 10px;
+            background-color: #1E88E5;
+            border-radius: 50%;
+        }
+        
+        .main {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .main h1 {
+            color: #0056D2;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            text-align: left;
+            padding: 15px;
+        }
+
+        table th {
+            background-color: #f1f5fc;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9fbfd;
+        }
+
+        .actions a {
+            text-decoration: none;
+            padding: 8px 12px;
+            margin-right: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .actions .edit-link {
+            background-color: #0056D2;
+        }
+
+        .actions .delete-link {
+            background-color: #FF4D4D;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div>
+            <a href="add">
+                <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
+            </a>
+            <a href="view">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="View Icon"> View All Patient Record
+            </a>
+            <a href="search">
+                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
+            </a>
+        </div>
+        <div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Profile Icon">
+                <span>Dr. Alex Rebuca</span>
+            </div>
+            <!-- Logout Button -->
+            <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <h1>Patient Records</h1>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Name</th>
+                        <th>Course/Section</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.student_number }}</td>
+                        <td>{{ patient.name }}</td>
+                        <td>{{ patient.cys }}</td>
+                        <td class="actions">
+                            <a href="{{ url_for('update_patient', student_number=patient.student_number) }}" class="edit-link">Edit</a>
+                            <a href="{{ url_for('delete_patient', student_number=patient.student_number) }}" class="delete-link" onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+</div>
+</body>
+</html>
+
+
+
+#### SEARCH::
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 25%;
+            background-color: #1e73be;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar a:hover {
+            color: #cce4ff;
+        }
+
+        .sidebar .footer {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .content {
+            flex: 1;
+            background-color: #fff;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px 0 0 15px;
+        }
+
+        .content h2 {
+            color: #1e73be;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        form label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        form input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        form input:focus {
+            outline: none;
+            border-color: #006699;
+            box-shadow: 0 0 8px rgba(0, 102, 153, 0.5);
+        }
+
+        form button {
+            background-color: #006699;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        form button:hover {
+            background-color: #004d66;
+            transform: scale(1.05);
+        }
+
+        form button:active {
+            transform: scale(1);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #1e73be;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div>
+                <a href="add"><img src="user-icon.png" alt="Add" style="width:20px;"> Add Patient</a>
+                <a href="view"><img src="records-icon.png" alt="Records" style="width:20px;"> View All Patient Record</a>
+                <a href="search"><img src="search-icon.png" alt="Search" style="width:20px;"> Search Patient Record</a>
+            </div>
+            <div class="footer">
+                Dr. Alex Rebuca
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="form-container">
+                <form action="{{ url_for('search_patient') }}" method="POST">
+                    <label for="student_number">Enter student number:</label>
+                    <input type="text" id="student_number" name="student_number" required>
+                    <button type="submit">Search</button>
+                </form>
+                {% if patient %}
+                    <div class="patient-details">
+                        <h2>Patient Details</h2>
+                        <p>Student ID: {{ patient.student_number }}</p>
+                        <p>Full Name: {{ patient.name }}</p>
+                        <p>Course/Section: {{ patient.cys }}</p>
+                        <p>Date of Birth: {{ patient.dob }}</p>
+                        <p>Age: {{ patient.age }}</p>
+                        <p>Sex: {{ patient.sex }}</p>
+                        <p>Emergency Phone: {{ patient.emergency_phone }}</p>
+                        <p>Emergency Email: {{ patient.emergency_email }}</p>
+                        <p>Health Condition: {{ patient.health_condition }}</p>
+                        <p>Medication Name: {{ patient.medication_name }}</p>
+                        <p>Prescriber: {{ patient.prescriber }}</p>
+                        <p>Date of Visit: {{ patient.visit_date }}</p>       
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+### update::
+
+
+<!-- templates/update.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Patient Record</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='update.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Update Patient Record</h2>
+        <form action="{{ url_for('update_patient', student_number=patient['student_number']) }}" method="POST">
+            <div class="form-group">
+                <label for="student_number">Student ID:</label>
+                <input type="text" id="student_number" name="student_number" value="{{ patient['student_number'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" value="{{ patient['name'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="cys">Course/Section:</label>
+                <input type="text" id="cys" name="cys" value="{{ patient['cys'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" value="{{ patient['dob'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" value="{{ patient['age'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex" required>
+                    <option value="Male" {{ 'selected' if patient['sex'] == 'Male' else '' }}>Male</option>
+                    <option value="Female" {{ 'selected' if patient['sex'] == 'Female' else '' }}>Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="emergency_phone">Emergency Phone:</label>
+                <input type="text" id="emergency_phone" name="emergency_phone" value="{{ patient['emergency_phone'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="emergency_email">Emergency Email:</label>
+                <input type="email" id="emergency_email" name="emergency_email" value="{{ patient['emergency_email'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="health_condition">Health Condition:</label>
+                <input type="text" id="health_condition" name="health_condition" value="{{ patient['health_condition'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="medication_name">Medication Name:</label>
+                <input type="text" id="medication_name" name="medication_name" value="{{ patient['medication_name'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="prescriber">Prescriber:</label>
+                <input type="text" id="prescriber" name="prescriber" value="{{ patient['prescriber'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="visit_date">Date of Visit:</label>
+                <input type="date" id="visit_date" name="visit_date" value="{{ patient['visit_date'] }}" required>
+            </div>
+            <button type="submit" class="btn">Update</button>
+        </form>
+    </div>
+</body>
+</html>

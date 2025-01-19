@@ -67,14 +67,26 @@
         }
 
      
-        .main {
-            margin-left: -500px;
-            flex: 1;
-            background-color: #F4F6F8;
-            padding: 40px;}
-    
-  
 
+    
+        .Description {
+  width: 800px;
+  margin-left: -500px;
+  font-size: 18px;
+  word-spacing: 3.8px;
+  line-height: 23px;
+  font-style: poppins;
+  background-color: white;
+  padding: 25px;
+  margin-top: 50px;
+  border-radius: 15px;
+}
+.Description h2 {
+  color: #1E88E5;
+  margin-left: 30px;
+  margin-top: 5px;
+  margin-right: 300px;
+}
 .top-right-icon {
   position: absolute;
   top: 20px;
@@ -94,55 +106,6 @@
   background-color: #1E88E5;
   border-radius: 50%;
 }
-
-.main {
-            flex-grow: 1;
-            padding: 20px;
-        }
-
-        .main h1 {
-            color: #0056D2;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        table th, table td {
-            text-align: left;
-            padding: 15px;
-        }
-
-        table th {
-            background-color: #f1f5fc;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f9fbfd;
-        }
-
-        .actions a {
-            text-decoration: none;
-            padding: 8px 12px;
-            margin-right: 5px;
-            border-radius: 5px;
-            font-size: 14px;
-            color: white;
-        }
-
-        .actions .edit-link {
-            background-color: #0056D2;
-        }
-
-        .actions .delete-link {
-            background-color: #FF4D4D;
-        }
 
     </style>
 </head>
@@ -167,43 +130,12 @@
         </div>
     </div>
 
-   
-
-
-
-    <div class="main">
-        <h1>Patient Records</h1>
-        <div class="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Student Number</th>
-                        <th>Name</th>
-                        <th>Course/Section</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for patient in patients %}
-                    <tr>
-                        <td>{{ patient.student_number }}</td>
-                        <td>{{ patient.name }}</td>
-                        <td>{{ patient.cys }}</td>
-                        <td class="actions">
-                            <a href="{{ url_for('update_patient', student_number=patient.student_number) }}" class="edit-link">Edit</a>
-                            <a href="{{ url_for('delete_patient', student_number=patient.student_number) }}" class="delete-link" onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-
-
-
+    <div class="Description">
+        <div class="main-content">
+            <h2>Description</h2>
+            <p>
+                Lorem ipsum dolor amet, consectetuer adipiscing elit. Effictur maecenas inceptos sollicitudin convallis orci quis in tristique. Sollicitudin risus facilisis; taciti duis commodo laoreet. Consectetur facilisis potenti lobortis praesent at pulvinar proin. Lorem ipsum odor amet, consectetuer adipiscing elit.
+            </p>
 
             <div class="dots">
                 <span></span>

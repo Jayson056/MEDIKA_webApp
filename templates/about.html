@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medika - Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about.css') }}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap">
+</head>
+<body>
+    <header>
+        <section class="navbar">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="MEDIKA" class="logo-image">
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="about" style="color: #00bf63;">About</a></li>
+                <li><a href="services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="login-container">
+                <input type="text" placeholder="User ID" id="username" class="login-input">
+                <input type="password" placeholder="Password" id="password" class="login-input">
+                <button class="login-button" onclick="loginUser()">Log In</button>
+            </div>
+            <p id="error-message" class="error-message" >Invalid username or password.</p>
+        </nav>
+    </header>  
+
+    <script>
+        function loginUser() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Send a POST request to the backend with username and password
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: username, password: password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/dashboard';  // Redirect to dashboard on success
+                } else {
+                    document.getElementById("error-message").style.display = "block";  // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                window.location.href = '/login';
+            });
+        }
+    </script>
+
+<section class = "about">
+    <div class="about-content">
+        <img src="{{ url_for('static', filename='assets/features-bg.png') }}" alt="About Background" class="about-bg">
+        <div class="girl-doctor">
+            
+            <img src="{{ url_for('static', filename='assets/girl-doc.png') }}" alt = "girl doctor" class="about-img">
+        </div>
+        <h1>
+            <span style="color:#0453b9;">About</span>
+            <span style="color:#ff3131;">Medika</span>
+        </h1> 
+        <div> 
+        <p> Medika is a simple and efficient tool designed to help manage patient health records.
+            It provides an organized system for storing and updating student health information,
+            ensuring easy access to important details like medical assessments, dates of visits,
+            and basic personal data. With features like adding, viewing, searching, and updating 
+            records, Medika streamlines the process of maintaining accurate and up-to-date patient
+            data. The goal of Medika is to ensure proper documentation and support in tracking the
+            health of students effectively and conveniently.</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
