@@ -13,6 +13,7 @@
             height: 100vh;
         }
 
+        /* sidebar.css */
         .sidebar {
             width: 200px;
             margin-right: 500px;
@@ -24,6 +25,8 @@
             padding: 60px;
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
+            transition: width 0.3s ease-in-out;
+            animation: slideIn 0.5s ease-out; /* Animation to slide in sidebar */
         }
 
         .sidebar a {
@@ -34,6 +37,9 @@
             margin: 20px 0;
             display: flex;
             align-items: center;
+            position: relative;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Added transition for transform */
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .sidebar a img {
@@ -41,18 +47,43 @@
             margin-right: 10px;
             width: 60px;
             height: 50px;
+            transition: transform 0.3s ease;
         }
 
+        /* Hover effect */
+        .sidebar a:hover {
+            background-color: #004C8C;
+            border-radius: 5px;
+            padding: 10px;
+            transform: scale(1.05); /* Slightly enlarge the link on hover */
+        }
+
+        /* Active link styles */
+        .sidebar a.active {
+            background-color: #efefef6f;
+            border-radius: 5px;
+            width: 235px;
+            padding: 10px;
+            transform: scale(1.05); /* Slightly enlarge the active link */
+        }
+
+        /* Profile section styling */
         .profile {
             width: auto;
             opacity: 1.2;
             text-align: center;
+            animation: fadeIn 0.5s ease-in-out; /* Profile fade-in effect */
         }
 
         .profile img {
             width: 50px;
             border-radius: 50%;
             margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile img:hover {
+            transform: scale(1.1); /* Profile image grows on hover */
         }
 
         .profile span {
@@ -60,92 +91,131 @@
             font-weight: bold;
         }
 
-        .main-content {
-            width: 79%;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+ /* Medika icon section styling */
+ .medika-logo {
+            width: auto;
+            opacity: 1.2;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out; /* Profile fade-in effect */
         }
 
-        .Description {
-            width: 800px;
-            margin-left: -500px;
-            font-size: 18px;
-            word-spacing: 3.8px;
-            line-height: 23px;
-            font-family: 'Poppins', sans-serif;
-            background-color: white;
-            padding: 25px;
-            margin-top: 50px;
-            border-radius: 15px;
+        .medika-logo img {
+            margin-left: 690%;
+            margin-top: 30px;
+            width: 50px;
+            border-radius: 5%;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
         }
 
-        .Description h2 {
-            color: #1E88E5;
-            margin-left: 30px;
+        .medika-logo img:hover {
+            transform: scale(1.1); /* Profile image grows on hover */
+        }
+
+        .medika-logo span {
             margin-top: 5px;
+            display: block;
+            font-weight: bold;
         }
 
-        .dots {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 10px);
-            grid-gap: 5px;
+
+
+
+
+        /* Animation for the sidebar */
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%); /* Start from the left off-screen */
+            }
+            100% {
+                transform: translateX(0); /* Slide to normal position */
+            }
         }
 
-        .dots span {
-            width: 10px;
-            height: 10px;
-            background-color: #1E88E5;
-            border-radius: 50%;
+        /* Fade-in animation for menu items */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px); /* Start slightly below */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* End in normal position */
+            }
         }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            margin-top: 10px;
-        }
+        /* Dropdown menu animation */
+      /* Dropdown menu container */
 
-        .dropdown img {
-            margin-left: 80px;
-            cursor: pointer;
-            width: 30px;
-            height: 20px;
-        }
 
+
+
+
+
+.dropdown {
+    position: absolute;
+    top: 87.3%; /* This ensures the dropdown appears below the profile */
+    left: 9%; /* Centers the dropdown relative to the profile */
+    transform: translateX(-50%); /* Corrects the positioning to truly center */
+    margin-top: 10px; /* Adds some space between the profile and the dropdown */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Dropdown icon (arrow) */
+.dropdown img {
+    cursor: pointer;
+    width: 40px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown img:hover {
+    transform: rotate(180deg); /* Rotate the arrow on hover */
+}
+
+
+
+
+
+
+        /* Dropdown content */
         .dropdown-content {
-            width: 90px;
-            height: 90px;
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 100px;
-            box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+            min-width: 120px;
+            box-shadow: 3px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 99;
-            bottom: 33px;
-            right: 0;
+            top: 100%; /* Position the dropdown below the profile image */
+            left: 0;
             border-radius: 8px;
             overflow: hidden;
+            animation: slideDown 0.3s ease-in-out; /* Dropdown slide-in animation */
         }
 
         .dropdown-content a {
-            margin-top: 10px;
-            margin-left: 2px;
             color: black;
             padding: 12px 16px;
             text-decoration: none;
-            font-size: 10px;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
+            font-size: 14px;
         }
 
         .dropdown.show .dropdown-content {
             display: block;
+        }
+
+        /* Animation for dropdown */
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px); /* Start from above */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* End in normal position */
+            }
         }
 
         .overlay {
@@ -186,18 +256,60 @@
         .upload-box button:hover {
             background-color: #0055AA;
         }
+
+        .main-content {
+            width: 79%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .Description {
+            width: 800px;
+            margin-left: -539px;
+            font-size: 18px;
+            word-spacing: 3.8px;
+            line-height: 23px;
+            font-family: 'Poppins', sans-serif;
+            padding: 25px;
+            margin-top: 50px;
+            border-radius: 15px;
+        }
+
+        .Description h2 {
+            color: #1E88E5;
+            margin-left: 30px;
+            margin-top: 5px;
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 10px);
+            grid-gap: 5px;
+        }
+
+        .dots span {
+            width: 10px;
+            height: 10px;
+            background-color: #1E88E5;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <div>
-            <a href="add">
+            <a href="add" id="addPatient">
                 <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
             </a>
-            <a href="view">
+            <a href="view" id="viewPatients">
                 <img src="{{ url_for('static', filename='assets/view_all.png') }}" alt="View Icon"> View All Patient Record
             </a>
-            <a href="search">
+            <a href="search" id="searchPatients">
                 <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
             </a>
         </div>
@@ -209,14 +321,15 @@
                      alt="Profile Icon">
                 <span>{{ username }}</span>
             </div>
-            <div class="dropdown">
-                <img src="{{ url_for('static', filename='assets/arrowdown.png') }}" alt="Dropdown Arrow" 
-                     onclick="toggleDropdown()"> 
-                <div class="dropdown-content">
-                    <a style="height: 2px;" href="#" onclick="openOverlay()">Upload Profile</a>
-                    <a style="height: 2px;" href="logout">Sign Out</a>
-                </div>
-            </div>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <img src="{{ url_for('static', filename='assets/arrowdown.png') }}" alt="Dropdown Arrow" 
+             onclick="toggleDropdown()"> 
+        <div class="dropdown-content">
+            <a href="#" onclick="openOverlay()">Upload Profile</a>
+            <a href="logout">Sign Out</a>
         </div>
     </div>
 
@@ -229,6 +342,10 @@
             </form>
             <button onclick="closeOverlay()">Cancel</button>
         </div>
+    </div>
+
+    <div class="medika-logo">
+        <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Add Icon">
     </div>
 
     <div class="Description">
@@ -253,6 +370,28 @@
     </div>
 
     <script>
+        // Sidebar link event listeners
+        document.getElementById("addPatient").addEventListener("click", function () {
+            setActiveLink("addPatient");
+        });
+        document.getElementById("viewPatients").addEventListener("click", function () {
+            setActiveLink("viewPatients");
+        });
+        document.getElementById("searchPatients").addEventListener("click", function () {
+            setActiveLink("searchPatients");
+        });
+
+        // Set active link on sidebar
+        function setActiveLink(activeId) {
+            const links = document.querySelectorAll(".sidebar a");
+            links.forEach(link => {
+                link.classList.remove("active"); // Remove 'active' class from all links
+            });
+
+            // Add 'active' class to the clicked link
+            document.getElementById(activeId).classList.add("active");
+        }
+
         // Toggle dropdown menu
         function toggleDropdown() {
             const dropdown = document.querySelector('.dropdown');
@@ -326,6 +465,5 @@
             }, 2300);
         }
     </script>
-
 </body>
 </html>
