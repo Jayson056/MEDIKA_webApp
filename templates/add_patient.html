@@ -14,22 +14,21 @@
         }
 
         .sidebar {
-            width: 280px;
+            width: 200px;
             margin-right: 500px;
             background-color: #0066CC;
             color: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 62px;
+            padding: 60px;
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
         }
 
         .sidebar a {
-            margin-top: 9;
-            margin-top: 90px;
             text-decoration: none;
+            height: 90px;
             color: white;
             font-size: 18px;
             margin: 20px 0;
@@ -38,11 +37,15 @@
         }
 
         .sidebar a img {
+            margin-top: 9px;
             margin-right: 10px;
-            margin-top: 12px;
+            width: 60px;
+            height: 50px;
         }
 
         .profile {
+            width: auto;
+            opacity: 1.2;
             text-align: center;
         }
 
@@ -56,6 +59,7 @@
             display: block;
             font-weight: bold;
         }
+
 
 
         .main-content {
@@ -153,6 +157,89 @@
                 grid-template-columns: 1fr;
             }
         }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .dropdown img {
+            margin-left: 80px;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+        }
+
+        .dropdown-content {
+            width: 90px;
+            height: 90px;
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 100px;
+            box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            bottom: 33px;
+            right: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            margin-top: 10px;
+            margin-left: 2px;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            font-size: 10px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown.show .dropdown-content {
+            display: block;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .upload-box input[type="file"] {
+            margin: 10px 0;
+        }
+
+        .upload-box button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #0066CC;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload-box button:hover {
+            background-color: #0055AA;
+        }
     </style>
 </head>
 <body>
@@ -162,7 +249,7 @@
                 <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
             </a>
             <a href="view">
-                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="View Icon"> View All Patient Record
+                <img src="{{ url_for('static', filename='assets/view_all.png') }}" alt="View Icon"> View All Patient Record
             </a>
             <a href="search">
                 <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
@@ -170,9 +257,31 @@
         </div>
         <div>
             <div class="profile">
-                <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Profile Icon">
-                <span>Dr. Alex Rebuca</span>
+                <img src="{{ url_for('static', filename='assets/ICON/' + username + '.png') }}" 
+                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='ICON/' + username + '.jpg') }}';" 
+                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='ICON/' + username + '.jpeg') }}';" 
+                     alt="Profile Icon">
+                <span>{{ username }}</span>
             </div>
+            <div class="dropdown">
+                <img src="{{ url_for('static', filename='assets/arrowdown.png') }}" alt="Dropdown Arrow" 
+                     onclick="toggleDropdown()"> 
+                <div class="dropdown-content">
+                    <a style="height: 2px;" href="#" onclick="openOverlay()">Upload Profile</a>
+                    <a style="height: 2px;" href="logout">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="upload-box">
+            <h3>Upload Profile Picture</h3>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" name="profilePicture" accept=".png, .jpg, .jpeg" required>
+                <button type="submit">Upload</button>
+            </form>
+            <button onclick="closeOverlay()">Cancel</button>
         </div>
     </div>
 
@@ -240,5 +349,82 @@
             </form>
         </div>
     </div>
+
+
+    <script>
+        // Toggle dropdown menu
+        function toggleDropdown() {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Open the overlay
+        function openOverlay() {
+            document.getElementById("overlay").style.display = "flex";
+        }
+
+        // Close the overlay
+        function closeOverlay() {
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        // Handle file upload
+        document.getElementById("uploadForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch("/upload-profile", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => {
+                    // Check if response is OK and is JSON
+                    if (!response.ok) {
+                        // If not OK, parse the JSON error or throw a generic error
+                        return response.json().then(error => {
+                            throw new Error(error.message || "Unexpected error occurred.");
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Display success message and close overlay
+                        showFlashMessage(data.message || "Uploaded successfully!");
+                        closeOverlay();
+                    } else {
+                        throw new Error(data.message || "Upload failed.");
+                    }
+                })
+                .catch(error => {
+                    // Display error message
+                    showFlashMessage(`Error: ${error.message}`, "error");
+                });
+        });
+
+        // Function to display flash message
+        function showFlashMessage(message, type = "success") {
+            const flashMessage = document.createElement("div");
+            flashMessage.textContent = message;
+            flashMessage.style.position = "fixed";
+            flashMessage.style.bottom = "20px";
+            flashMessage.style.left = "50%";
+            flashMessage.style.transform = "translateX(-50%)";
+            flashMessage.style.backgroundColor = type === "success" ? "#4CAF50" : "#f44336"; // Green for success, red for error
+            flashMessage.style.color = "white";
+            flashMessage.style.padding = "10px 20px";
+            flashMessage.style.borderRadius = "5px";
+            flashMessage.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+            flashMessage.style.zIndex = "10000";
+            document.body.appendChild(flashMessage);
+
+            // Remove flash message after 2.3 seconds
+            setTimeout(() => {
+                document.body.removeChild(flashMessage);
+            }, 2300);
+        }
+    </script>
+
 </body>
 </html>

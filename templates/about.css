@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+  overflow-x: hidden; /* Fine for preventing horizontal scrolling */
+}
+
+@font-face {
+  font-family: 'Sequel100Black-45';
+  src: url('assets/Sequel100Black-45.woff2') format('truetype'),
+       url('assets/ab80d41fb980ff40273bb0028779b41e.woff') format('woff'),
+       url('assets/Sequel100Black-45.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Poppins', Helvetica;
+}
+
+
+header {
+  background-image: linear-gradient(#003f8f, #1c68cb);
+  overflow: hidden;
+}
+
+.navbar {
+  background-image: linear-gradient(#003f8f, #04A4DE);
+  display: flex; /* Corrected from flexbox to flex */
+  flex-wrap: wrap;
+  z-index: 9999;
+  justify-content: space-between; /* Space between elements */
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  float: left;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  float: right;
+}
+
+.login-input {
+  padding: 5px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 8px;
+}
+
+.login-button {
+  padding: 5px 10px;
+  margin-left: 5px;
+  background-color: #00bf63; /* Button color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.login-button:hover {
+  background-color: #00bf63; /* Darker button color on hover */
+}
+
+.nav-links {
+  font-family: 'Fredoka';
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  flex-grow: 1; /* Allow nav links to take available space */
+  justify-content: center; /* Center the nav links */
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #00bf63;
+}
+
+main {
+  padding: 25px;
+}
+
+.hero {
+  width: 100%;
+  height: 100vh; /* Fullscreen height */
+  overflow: hidden; /* Prevent any overflow from containers */
+}
+
+.hero-content {
+  display: flex;
+  width: 100%;
+  height: 100vh; /* Match full height of the hero section */
+  text-align: center; /* Center-align text */
+}
+
+.bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Push background behind text */
+}
+.hero-img {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  width: 65%;
+  height: 75%;
+  z-index: -1; /* Push background behind text */
+}
+
+.hero-back {
+  position:absolute;
+  z-index: 1; /* Ensure text is above the background image */
+  width: 100%;
+  padding: 0 20px;
+  right: 00%;
+  top: 30%;
+
+}
+
+.hero-back h1 {
+  font-family: 'Fredoka';
+  font-size: 3rem; /* Massive text size based on viewport width */
+  font-weight: 900; /* Extra bold text */
+  text-align: left;
+  color: #19203e;
+  line-height: 1.1; /* Slightly tightened line spacing */
+  text-transform: uppercase;
+  margin: 0;
+  overflow: hidden;
+}
+
+.hero-back p {
+  font-family: 'Poppins';
+  font-size: medium;
+  font-weight: lighter;
+  text-align: left;
+  color: #19203e;
+  line-height: 1.1; /* Slightly tightened line spacing */
+  padding-top: 1.5%;
+  word-wrap: break-word; /* Ensures text doesn't overflow */
+  overflow: hidden;
+}
+
+.about-content {
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  color: #19203e;
+  font-family: 'Poppins';
+  font-size: medium;
+  font-weight: lighter;
+  overflow: hidden;
+}
+
+.about-content h1 {
+  font-family: 'Fredoka';
+  font-size: 5rem; /* Massive text size based on viewport width */
+  font-weight: 700; /* Extra bold text */
+  text-align: left;
+  padding-top: 15%;
+  padding-left: 10%;
+  line-height: 1.1; /* Slightly tightened line spacing */  
+  word-wrap: break-word; 
+  overflow: hidden;
+}
+
+.about-content p {
+  font-family: 'Poppins';
+  font-size: 5rem;
+  font-size: large;
+  font-weight: lighter;
+  text-align: justify;
+  color: #19203e;
+  padding-left: 10%;
+  padding-right: 55%;
+  line-height: 1.1; /* Slightly tightened line spacing */
+  padding-top: 1.5%;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+.about-bg {
+  top: 100%;
+  position: absolute;  
+  width: 100%;
+  height: 110%;
+  object-fit: fill;
+  z-index: -1; /* Push background behind text */
+  overflow: hidden;
+}
+
+.about-img {
+  position: absolute;
+  top: 110%;
+  left: 30%;
+  width: 90%;
+  height: 95%;
+  z-index: -1; /* Push background behind text */
+  overflow: hidden;
+}

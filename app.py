@@ -8,6 +8,44 @@ from reportlab.lib import colors
 
 app = Flask(__name__)
 
+UPLOAD_FOLDER = 'static/assets/ICON'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    """Check if a file has a valid extension."""
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload-profile', methods=['POST'])
+def upload_profile():
+    """Handle file uploads."""
+    try:
+        if 'profilePicture' not in request.files:
+            return jsonify({'success': False, 'message': 'No file part in the request'}), 400
+
+        file = request.files['profilePicture']
+        if file.filename == '':
+            return jsonify({'success': False, 'message': 'No file selected'}), 400
+
+        if file and allowed_file(file.filename):
+            # Assuming the username is stored in the session
+            username = session.get('username', 'default_user')  # Replace with your actual session handling
+            filename = f"{username}.png"  # Save all files as PNG
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+            # Ensure the upload folder exists
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+            # Save the file
+            file.save(filepath)
+            return jsonify({'success': True, 'message': 'Profile picture uploaded successfully!'})
+
+        return jsonify({'success': False, 'message': 'Invalid file type. Only PNG, JPG, and JPEG are allowed.'}), 400
+
+    except Exception as e:
+        # Return JSON error message in case of any exception
+        return jsonify({'success': False, 'message': str(e)}), 500
+
 # Secret key for session management
 app.config['SECRET_KEY'] = 'your_secret_key'
 
@@ -130,7 +168,7 @@ def add_patient():
 
         return redirect(url_for('dashboard'))
 
-    return render_template('add_patient.html')
+    return render_template('add_patient.html', username=session['username'])
 
 @app.route("/about")
 def about():
@@ -143,28 +181,28 @@ def services():
 @app.route("/view")
 def view_patients():
     patients = read_patients()
-    return render_template("view_patients.html", patients=patients)
+    return render_template("view_patients.html", patients=patients,username=session['username'])
 
 @app.route("/search", methods=["GET", "POST"])
 def search_patient():
     if request.method == "POST":
-        student_number = request.form.get("student_number")  # Using .get() to handle missing keys gracefully
+        student_number = request.form.get("student_number")
         if student_number:
-            patients = read_patients()  # Assuming this function loads your patient data
+            patients = read_patients()
             found_patient = None
             for patient in patients:
                 if patient["student_number"] == student_number or patient["name"].lower() == student_number.lower():
                     found_patient = patient
                     break
             if found_patient:
-                return render_template("patient_details.html", patient=found_patient)
+                return render_template("patient_details.html", patient=found_patient, username=session['username'])
             else:
                 error_message = "ID or Name not found. Please enter again."
-                return render_template("search.html", error_message=error_message)
+                return render_template("search.html", error_message=error_message, username=session['username'])
         else:
             error_message = "Please enter a valid student number."
-            return render_template("search.html", error_message=error_message)
-    return render_template("search.html")
+            return render_template("search.html", error_message=error_message, username=session['username'])
+    return render_template("search.html", username=session['username'])
 
 
 # Route for updating patient information
@@ -173,7 +211,7 @@ def update_patient(student_number):
     patients = read_patients()
     patient = next((p for p in patients if p["student_number"] == student_number), None)
     if not patient:
-        return "Patient not found!", 404
+        return redirect(url_for("home"))
     if request.method == "POST":
         patient.update({
             "name": request.form["name"],
@@ -190,7 +228,7 @@ def update_patient(student_number):
         })
         write_patients(patients)
         return redirect(url_for("view_patients"))
-    return render_template("update.html", patient=patient)
+    return render_template("update.html", patient=patient,username=session['username'])
 
 # Route for deleting patient
 @app.route("/delete/<student_number>")
@@ -227,6 +265,10 @@ def login_api():
         return jsonify({'success': True})
     else:
         return jsonify({'success': False})
+    
+
+    
+    
 
 
 
@@ -294,6 +336,7 @@ def generate_pdf(student_number):
 
     # Send the PDF to the browser as an attachment
     return send_file(buffer, as_attachment=True, download_name=f"{patient['name']}_details.pdf", mimetype="application/pdf")
+
 
 
 
