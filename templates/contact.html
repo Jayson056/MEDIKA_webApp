@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medika - Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='contact.css') }}"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap">
+</head>
+<body>
+    <header>
+        <section class="navbar">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='medika-logo.png') }}" alt="MEDIKA" class="logo-image">
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="services">Services</a></li>
+                <li><a href="#contact" style="color: #00bf63;">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="login-container">
+                <input type="text" placeholder="User ID" id="username" class="login-input">
+                <input type="password" placeholder="Password" id="password" class="login-input">
+                <button class="login-button" onclick="loginUser()">Log In</button>
+            </div>
+            <p id="error-message" class="error-message" >Invalid username or password.</p>
+        </nav>
+    </header>  
+
+    <script>
+        function loginUser() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Send a POST request to the backend with username and password
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: username, password: password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/dashboard';  // Redirect to dashboard on success
+                } else {
+                    document.getElementById("error-message").style.display = "block";  // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                window.location.href = '/login';
+            });
+        }
+    </script>
+
+
+<!-- ============================================ -->
+<!--                   Contact                    -->
+<!-- ============================================ -->
+
+<section id="contact-1750">
+    <div class="cs-container">
+      <img src="{{ url_for('static', filename='assets/contact-bg.png') }}" alt="contact bg" class="bg-img">
+        <div class="cs-form-group">
+            <div class="cs-content">
+                <span class="cs-topper"> Get in Touch</span>
+                <h2 class="cs-title">
+                  <span style="color:#ff3131;">SEND</span>
+                  <span style="color:#1f284b;">US A MESSAGE!</span>
+                </h2>
+            </div>
+            <!--Form-->
+            <form class="cs-form" id="cs-form-1750" name="Contact Form" method="post">
+                <label class="cs-label">
+                    Name *
+                    <input class="cs-input" required type="text" id="name-1750" name="name" placeholder="Juan Dela Cruz">
+                </label>
+                <label class="cs-label cs-email">
+                    Email *
+                    <input class="cs-input" required type="email" id="email-1750" name="email" placeholder="name@company.com">
+                </label>
+                <label class="cs-label cs-phone">
+                    Phone *
+                    <input class="cs-input" required type="phone" id="phone-1750" name="phone" placeholder="+639498002788">
+                </label>
+                <label class="cs-label">
+                    Message *
+                    <textarea class="cs-input cs-textarea" required name="Message" id="message-1750" placeholder="Hello, Medika!"></textarea>
+                </label>
+                <button class="cs-button-solid cs-submit" type="submit">Send Message</button>
+            </form>
+        </div>
+        <!--Contact Info-->
+        <div class="cs-info-group">
+            <div class="cs-info">
+                <span class="cs-topper">Location</span>
+                <span class="cs-detail">1016 Anonas, Sta. Mesa, Maynila, Kalakhang Maynila</span>
+            </div>
+            <div class="cs-info">
+                <span class="cs-topper">Working Hours</span>
+                <span class="cs-detail">Monday - Saturday: 10:00 - 20:00</span>
+                <span class="cs-detail">Sunday: Closed</span>
+            </div>
+            <div class="cs-info">
+                <span class="cs-topper">Contact</span>
+                <span class="cs-detail">M: (+63) 917-654-3210</span>
+                <span class="cs-detail">E: pupmedika1246@gmail.com</span>
+            </div>
+        </div>
+    </div>
+  
+    <div class="cs-picture-group">
+        <!--Google map location-->
+        <iframe class="cs-iframe" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Polytechnic University of the Philippines&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  
+        <img class="cs-graphic cs-top cs-light" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/gym-hero-shape-top-light.svg" alt="graphic" height="161" width="1920" loading="lazy" decoding="async" >
+        <img class="cs-graphic cs-left cs-light" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/gym-hero-shape-top-light.svg" alt="graphic" height="161" width="1920" loading="lazy" decoding="async" >
+        <img class="cs-graphic cs-bottom cs-light" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/gym-hero-shape-top-light.svg" alt="graphic" height="161" width="1920" loading="lazy" decoding="async" >
+  
+        <img class="cs-graphic cs-top cs-dark" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/gym-hero-shape-top-dark.svg" alt="graphic" height="161" width="1920" loading="lazy" decoding="async" >
+        <img class="cs-graphic cs-left cs-dark" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/gym-hero-shape-top-dark.svg" alt="graphic" height="161" width="1920" loading="lazy" decoding="async" >
+        <img class="cs-graphic cs-bottom cs-dark" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/gym-hero-shape-top-dark.svg" alt="graphic" height="161" width="1920" loading="lazy" decoding="async" >
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!--                   Footer                     -->
+  <!-- ============================================ -->
+  
+  <footer id="cs-footer-108">
+    <div class="cs-container">
+        <span class="cs-copyright">©2025 Cobolt Co. All rights reserved.
+    </div>
+  </footer>
+  
+  
+  
+  
+
+
+</body>
+</html>

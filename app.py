@@ -186,6 +186,11 @@ def view_patients():
     patients = read_patients()
     return render_template("view_patients.html", patients=patients,username=session['username'])
 
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+
 # Flask Route Code
 @app.route("/search", methods=["GET", "POST"])
 def search_patient():

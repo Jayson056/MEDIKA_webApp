@@ -17,8 +17,8 @@
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="about">About</a></li>
-                <li><a href="#services" style="color: #00bf63;">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" style="color: #00bf63;">Services</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -66,87 +66,68 @@
 
 
 
-<section class = "features">
-    <div class="features-content">
-        <img src="{{ url_for('static', filename='assets/feautures-bg2.jpg') }}" alt="Features Background" class="features-bg">
-        <h1 class="features-title">
+</section>
+<!-- ============================================ -->
+<!--                  Services                    -->
+<!-- ============================================ -->
+<section id="services-296">
+  <div class="cs-container">
+      <div class="cs-content">
+          <h2 class="cs-title">
             <span style="color:#ff3131;">Medika</span>
-            <span style="color:#0453b9;">Features</span>
-        </h1>
-        <p> Medika offers a wide range of features carefully designed to simplify and streamline the
-            management of patient health records. With its user-friendly interface and reliable
-            functionality, it enables seamless handling of important medical data, ensuring that records
-            are efficiently and accurately maintained. By focusing on key tasks, Medika provides an 
-            organized and effective way to manage health-related information with ease. Below are the 
-            core functions that make Medika an essential tool:
-        </p>
-    </div>
-
-    <section class="features-section">
-        <div class="features-container">
-          <!-- Existing Divs -->
-          <div class="feature-1">
-            <div class="add-patient">
-              <div class="add-logo">
-                <img src="{{ url_for('static', filename='assets/add-logo.png') }}" class="add-icon">
-            
-              </div>
-              <div>
-                <h2 class="text-title">
-                  <span style="color:#ff3131;">Add</span>
-                  <span style="color:#0453b9;">New Patient</span>
-                </h2>
-              </div>
-            </div>
-            <p class="text-body">Create records with essential details like name, 
-              student number, health assessment, and visit date.</p>
-          </div>
-      
-          <div class="feature-1">
-            <div class="add-patient">
-              <div class="add-logo">
-                <img src="{{ url_for('static', filename='assets/search-patient.png') }}" class="add-icon">
-              </div>
-              <div>
-                <h2 class="text-title">
-                  <span style="color:#0453b9;">Search</span>
-                  <span style="color:#ff3131;">Patient Record</span>
-                </h2>
-              </div>
-            </div>
-            <p class="text-body">Quickly find patient info using their student number.</p>
-          </div>
-      
-          <div class="feature-1">
-            <div class="add-patient">
-              <div class="add-logo">
-                <img src="{{ url_for('static', filename='assets/update-record.png') }}" class="add-icon">
-              </div>
-              <div>
-                <h2 class="text-title">
-                  <span style="color:#ff3131;">Update</span>
-                  <span style="color:#0453b9;">Patient Record</span>
-                </h2>
-              </div>
-            </div>
-            <p class="text-body">Edit existing records to keep data accurate and current.</p>
-          </div>
-      
-          <!-- Additional Divs -->
-          <div class="feature-1">
-            <div class="add-patient">
-              <div class="add-logo">
-                <img src="{{ url_for('static', filename='assets/view-patient.png') }}" class="add-icon">
-              </div>
-              <div>
-                <h2 class="text-title">
-                  <span style="color:#0453b9;">View</span>
-                  <span style="color:#ff3131;">All Patient Records</span>
-                </h2>
-              </div>
-            </div>
-            <p class="text-body">Access and review all stored patient records in one place.</p>
-          </div>         
+            <span style="color:#0453b9;">Services</span>
+          </h2>
+          <p class="cs-text">
+            Medika offers a comprehensive range of services designed to simplify and improve the way patient health records are managed. 
+            These services focus on ensuring convenience, reliability, and accuracy in handling sensitive medical data. With its user-friendly 
+            features and secure infrastructure, Medika is an essential tool for institutions and individuals looking to manage health information effectively.
+          </p>
+      </div>
+      <ul class="cs-card-group">
+          <li class="cs-item">
+              <a class="cs-link" href="">
+                  <img class="cs-icon" src="{{ url_for('static', filename='assets/data-export icon.png') }}" alt="icon" width="" height="" loading="lazy" decoding="async" aria-hidden="true">
+                  <h3 class="cs-h3">Data Export</h3>
+                  <p class="cs-item-text">
+                    Easily export patient data for backups and external use.
+                  </p>
+              </a>
+              <picture class="cs-image"  aria-hidden="true">
+                  <source media="(max-width: 600px)" srcset="https://min-guide.eu/wp-content/uploads/2024/04/spfxujsfgd-1024x585.jpg">
+                  <source media="(min-width: 601px)" srcset="https://min-guide.eu/wp-content/uploads/2024/04/spfxujsfgd-1024x585.jpg">
+                  <img loading="lazy" decoding="async" src="hhttps://min-guide.eu/wp-content/uploads/2024/04/spfxujsfgd-1024x585.jpg" alt="library" width="413" height="266">
+              </picture>
+          </li>
+          <li class="cs-item">
+              <a href="" class="cs-link">
+                  <img class="cs-icon" src="{{ url_for('static', filename='assets/manage icon.png') }}" alt="icon" width="" height="" loading="lazy" decoding="async" aria-hidden="true">
+                  <h3 class="cs-h3">Patient Record Management</h3>
+                  <p class="cs-item-text">
+                    Simplifies organizing and maintaining accurate health records.
+                  </p>
+              </a>
+              <picture class="cs-image"  aria-hidden="true">
+                  <source media="(max-width: 600px)" srcset="https://2cqr.in/wp-content/uploads/2023/10/rfidhospital.webp">
+                  <source media="(min-width: 601px)" srcset="https://2cqr.in/wp-content/uploads/2023/10/rfidhospital.webp">
+                  <img loading="lazy" decoding="async" src="https://2cqr.in/wp-content/uploads/2023/10/rfidhospital.webp" alt="system" width="413" height="266">
+              </picture>
+          </li>
+          <li class="cs-item">
+              <a class="cs-link" href="">
+                  <img class="cs-icon" src="{{ url_for('static', filename='assets/security icon.png') }}" alt="icon" width="" height="" loading="lazy" decoding="async" aria-hidden="true">
+                  <h3 class="cs-h3">Data Security</h3>
+                  <p class="cs-item-text">
+                    Ensures that all patient information is protected and confidential.
+                  </p>
+              </a>
+              <picture class="cs-image">
+                  <source media="(max-width: 600px)" srcset="https://securityintelligence.com/wp-content/uploads/2023/06/Shield-Icon-of-Cyber-Security-Digital-Data-Technology-Global-Network-Digital-Data-Protection-Future-Abstract-Background-Concept.-3D-Rendering.jpeg">
+                  <source media="(min-width: 601px)" srcset="https://securityintelligence.com/wp-content/uploads/2023/06/Shield-Icon-of-Cyber-Security-Digital-Data-Technology-Global-Network-Digital-Data-Protection-Future-Abstract-Background-Concept.-3D-Rendering.jpeg">
+                  <img loading="lazy" decoding="async" src="https://securityintelligence.com/wp-content/uploads/2023/06/Shield-Icon-of-Cyber-Security-Digital-Data-Technology-Global-Network-Digital-Data-Protection-Future-Abstract-Background-Concept.-3D-Rendering.jpeg" alt="security" width="413" height="266" aria-hidden="true">
+              </picture>
+          </li>
+      </ul>
+  </div>
 </section>
 
 
