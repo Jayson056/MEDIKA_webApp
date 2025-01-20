@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard</title>
+    <title>Search Patient</title>
     <style>
-          body {
+        /* Styles (your provided CSS) */
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -13,88 +14,8 @@
             height: 100vh;
         }
 
-        /* sidebar.css */
-        .sidebar {
-            width: 200px;
-            margin-left: -5px;
-            margin-right: 500px;
-            background-color: #0066CC;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 60px;
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-            transition: width 0.3s ease-in-out;
-            animation: slideIn 0.5s ease-out; /* Animation to slide in sidebar */
-        }
 
-        .sidebar a {
-            text-decoration: none;
-            height: 90px;
-            color: white;
-            font-size: 18px;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            position: relative;
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Added transition for transform */
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .sidebar a img {
-            margin-top: 9px;
-            margin-right: 10px;
-            width: 60px;
-            height: 50px;
-            transition: transform 0.3s ease;
-        }
-
-        /* Hover effect */
-        .sidebar a:hover {
-            background-color: #004C8C;
-            border-radius: 5px;
-            padding: 10px;
-            transform: scale(1.05); /* Slightly enlarge the link on hover */
-        }
-
-        /* Active link styles */
-        .sidebar a.active {
-            background-color: #efefef6f;
-            border-radius: 5px;
-            width: 235px;
-            padding: 10px;
-            transform: scale(1.05); /* Slightly enlarge the active link */
-        }
-
-        /* Profile section styling */
-        .profile {
-            width: auto;
-            opacity: 1.2;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in-out; /* Profile fade-in effect */
-        }
-
-        .profile img {
-            width: 50px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .profile img:hover {
-            transform: scale(1.1); /* Profile image grows on hover */
-        }
-
-        .profile span {
-            display: block;
-            font-weight: bold;
-        }
-
-
-
- /* Medika icon section styling */
+        /* Medika icon section styling */
  .medika-logo {
             width: auto;
             opacity: 1.2;
@@ -124,64 +45,101 @@
 
 
 
-
-        /* Animation for the sidebar */
-        @keyframes slideIn {
-            0% {
-                transform: translateX(-100%); /* Start from the left off-screen */
-            }
-            100% {
-                transform: translateX(0); /* Slide to normal position */
-            }
+        .sidebar {
+            width: 200px;
+            margin-left: -5px;
+            margin-right: 500px;
+            background-color: #0066CC;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            transition: width 0.3s ease-in-out;
+            animation: slideIn 0.5s ease-out;
         }
 
-        /* Fade-in animation for menu items */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(10px); /* Start slightly below */
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0); /* End in normal position */
-            }
+        .sidebar a {
+            text-decoration: none;
+            height: 90px;
+            color: white;
+            font-size: 18px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        /* Dropdown menu animation */
-      /* Dropdown menu container */
+        .sidebar a img {
+            margin-top: 9px;
+            margin-right: 10px;
+            width: 60px;
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
 
+        .sidebar a:hover {
+            background-color: #004C8C;
+            border-radius: 5px;
+            padding: 10px;
+            transform: scale(1.05);
+        }
 
+        .sidebar a.active {
+            background-color: #efefef6f;
+            border-radius: 5px;
+            width: 235px;
+            padding: 10px;
+            transform: scale(1.05);
+        }
 
+        .profile {
+            width: auto;
+            opacity: 1.2;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
+        .profile img {
+            width: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
 
+        .profile img:hover {
+            transform: scale(1.1);
+        }
 
-.dropdown {
-    position: absolute;
-    top: 87.3%; /* This ensures the dropdown appears below the profile */
-    left: 8%; /* Centers the dropdown relative to the profile */
-    transform: translateX(-50%); /* Corrects the positioning to truly center */
-    margin-top: 10px; /* Adds some space between the profile and the dropdown */
-    animation: fadeIn 0.5s ease-in-out;
-}
+        .profile span {
+            display: block;
+            font-weight: bold;
+        }
 
-/* Dropdown icon (arrow) */
-.dropdown img {
-    cursor: pointer;
-    width: 40px;
-    height: 20px;
-    transition: transform 0.3s ease;
-}
+        .dropdown {
+            position: absolute;
+            top: 87.3%;
+            left: 8%;
+            transform: translateX(-50%);
+            margin-top: 10px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
-.dropdown img:hover {
-    transform: rotate(180deg); /* Rotate the arrow on hover */
-}
+        .dropdown img {
+            cursor: pointer;
+            width: 40px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
 
+        .dropdown img:hover {
+            transform: rotate(180deg);
+        }
 
-
-
-
-
-        /* Dropdown content */
         .dropdown-content {
             display: none;
             position: absolute;
@@ -189,11 +147,11 @@
             min-width: 120px;
             box-shadow: 3px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 99;
-            top: 100%; /* Position the dropdown below the profile image */
+            top: 100%;
             left: 0;
             border-radius: 8px;
             overflow: hidden;
-            animation: slideDown 0.3s ease-in-out; /* Dropdown slide-in animation */
+            animation: slideDown 0.3s ease-in-out;
         }
 
         .dropdown-content a {
@@ -207,80 +165,13 @@
             display: block;
         }
 
-        /* Animation for dropdown */
-        @keyframes slideDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px); /* Start from above */
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0); /* End in normal position */
-            }
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .upload-box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        .upload-box input[type="file"] {
-            margin: 10px 0;
-        }
-
-        .upload-box button {
-            margin-top: 10px;
-            padding: 8px 16px;
-            background-color: #0066CC;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .upload-box button:hover {
-            background-color: #0055AA;
-        }
-
-        .main-content {
-            width: 79%;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-    
         .content {
             flex: 1;
-            
             padding: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 15px 0 0 15px;
-        }
-
-        .content h2 {
-            color: #1e73be;
-            font-size: 24px;
-            margin-bottom: 20px;
         }
 
         .form-container {
@@ -310,12 +201,6 @@
             font-size: 1rem;
         }
 
-        form input:focus {
-            outline: none;
-            border-color: #006699;
-            box-shadow: 0 0 8px rgba(0, 102, 153, 0.5);
-        }
-
         form button {
             background-color: #006699;
             color: #ffffff;
@@ -325,16 +210,6 @@
             font-size: 1rem;
             cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        form button:hover {
-            background-color: #004d66;
-            transform: scale(1.05);
-        }
-
-        form button:active {
-            transform: scale(1);
         }
 
         .back-link {
@@ -344,29 +219,9 @@
             color: #1e73be;
             text-decoration: none;
         }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-.dots {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 10px);
-  grid-gap: 5px;
-}
-.dots span {
-  width: 10px;
-  height: 10px;
-  background-color: #1E88E5;
-  border-radius: 50%;
-}
     </style>
 </head>
 <body>
-    
     <div class="sidebar">
         <div>
             <a href="add" id="addPatient">
@@ -375,49 +230,21 @@
             <a href="view" id="viewPatients">
                 <img src="{{ url_for('static', filename='assets/view_all.png') }}" alt="View Icon"> View All Patient Record
             </a>
-            <a href="search" id="searchPatients">
+            <a href="search" id="searchPatients" class="active">
                 <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
             </a>
         </div>
-        <div>
-            <div class="profile">
-                <img src="{{ url_for('static', filename='assets/ICON/' + username + '.png') }}" 
-                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='ICON/' + username + '.jpg') }}';" 
-                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='ICON/' + username + '.jpeg') }}';" 
-                     alt="Profile Icon">
-                <span>{{ username }}</span>
-            </div>
+        <div class="profile">
+            <img src="{{ url_for('static', filename='assets/ICON/' + username + '.png') }}" 
+                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='assets/ICON/' + username + '.jpg') }}';" 
+                 alt="Profile Icon">
+            <span>{{ username }}</span>
         </div>
     </div>
 
-    <div class="dropdown">
-        <img src="{{ url_for('static', filename='assets/arrowdown.png') }}" alt="Dropdown Arrow" 
-             onclick="toggleDropdown()"> 
-        <div class="dropdown-content">
-            <a href="#" onclick="openOverlay()">Upload Profile</a>
-            <a href="logout">Sign Out</a>
-        </div>
-    </div>
-
-    <div class="overlay" id="overlay">
-        <div class="upload-box">
-            <h3>Upload Profile Picture</h3>
-            <form id="uploadForm" enctype="multipart/form-data">
-                <input type="file" name="profilePicture" accept=".png, .jpg, .jpeg" required>
-                <button type="submit">Upload</button>
-            </form>
-            <button onclick="closeOverlay()">Cancel</button>
-        </div>
-    </div>
-
-
-   
     <div class="medika-logo">
         <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Add Icon">
     </div>
-
-
-
 
     <div class="content">
         <div class="form-container">
@@ -440,12 +267,15 @@
                     <p>Health Condition: {{ patient.health_condition }}</p>
                     <p>Medication Name: {{ patient.medication_name }}</p>
                     <p>Prescriber: {{ patient.prescriber }}</p>
-                    <p>Date of Visit: {{ patient.visit_date }}</p>       
+                    <p>Date of Visit: {{ patient.visit_date }}</p>
+                </div>
+                {% elif error_message %}
+                <div class="error-message">
+                    <p>{{ error_message }}</p>
                 </div>
             {% endif %}
         </div>
     </div>
-</div>
 
 <script>
     // Sidebar link event listeners
@@ -542,6 +372,8 @@
             document.body.removeChild(flashMessage);
         }, 2300);
     }
+
+
 </script>
 </body>
 </html>

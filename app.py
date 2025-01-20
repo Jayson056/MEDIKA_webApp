@@ -54,26 +54,29 @@ DATA_FILE = "patients.txt"
 # Helper function to read patient records
 def read_patients():
     patients = []
-    with open(DATA_FILE, "r") as file:
-        for line in file:
-            fields = line.strip().split(",")
-            patients.append({
-                "student_number": fields[0],
-                "name": fields[1],
-                "cys": fields[2],
-                "dob": fields[3],
-                "age": fields[4],
-                "sex": fields[5],
-                "emergency_phone": fields[6],
-                "emergency_email": fields[7],
-                "health_condition": fields[8],
-                "medication_name": fields[9],
-                "prescriber": fields[10],
-                "visit_date": fields[11],
-            })
+    try:
+        with open(DATA_FILE, "r") as file:
+            for line in file:
+                fields = line.strip().split(",")
+                if len(fields) == 12:
+                    patients.append({
+                        "student_number": fields[0],
+                        "name": fields[1],
+                        "cys": fields[2],
+                        "dob": fields[3],
+                        "age": fields[4],
+                        "sex": fields[5],
+                        "emergency_phone": fields[6],
+                        "emergency_email": fields[7],
+                        "health_condition": fields[8],
+                        "medication_name": fields[9],
+                        "prescriber": fields[10],
+                        "visit_date": fields[11],
+                    })
+    except FileNotFoundError:
+        print(f"Error: '{DATA_FILE}' not found.")
     return patients
 
-# Helper function to write patient records
 def write_patients(patients):
     with open(DATA_FILE, "w") as file:
         for patient in patients:
@@ -183,25 +186,24 @@ def view_patients():
     patients = read_patients()
     return render_template("view_patients.html", patients=patients,username=session['username'])
 
+# Flask Route Code
 @app.route("/search", methods=["GET", "POST"])
 def search_patient():
     if request.method == "POST":
         student_number = request.form.get("student_number")
-        if student_number:
-            patients = read_patients()
-            found_patient = None
-            for patient in patients:
-                if patient["student_number"] == student_number or patient["name"].lower() == student_number.lower():
-                    found_patient = patient
-                    break
-            if found_patient:
+        if student_number:  # Ensure input is provided
+            patients = read_patients()  # Read patients data from database or file
+            found_patient = next((patient for patient in patients if patient["student_number"] == student_number), None)
+            
+            if found_patient:  # If patient is found
                 return render_template("patient_details.html", patient=found_patient, username=session['username'])
-            else:
-                error_message = "ID or Name not found. Please enter again."
+            else:  # If patient is not found
+                error_message = "No student found with the given student number."
                 return render_template("search.html", error_message=error_message, username=session['username'])
-        else:
+        else:  # If no input is provided
             error_message = "Please enter a valid student number."
             return render_template("search.html", error_message=error_message, username=session['username'])
+    # Render the search form on GET requests
     return render_template("search.html", username=session['username'])
 
 
@@ -212,9 +214,10 @@ def update_patient(student_number):
     patient = next((p for p in patients if p["student_number"] == student_number), None)
     if not patient:
         return redirect(url_for("home"))
+    
     if request.method == "POST":
         patient.update({
-            "name": request.form["name"],
+            "name": f"{request.form['first_name']} {request.form['middle_initial']} {request.form['last_name']}",  # Concatenate name
             "cys": request.form["cys"],
             "dob": request.form["dob"],
             "age": request.form["age"],
@@ -228,7 +231,9 @@ def update_patient(student_number):
         })
         write_patients(patients)
         return redirect(url_for("view_patients"))
-    return render_template("update.html", patient=patient,username=session['username'])
+    
+    return render_template("update.html", patient=patient, username=session['username'])
+
 
 # Route for deleting patient
 @app.route("/delete/<student_number>")

@@ -390,18 +390,18 @@
     <div class="content">
         <h2>Patient Details:</h2>
         <div class="details">
-            <p><span>Student ID:</span> 12345</p>
-            <p><span>Full Name:</span> Jayson</p>
-            <p><span>Course/Section:</span> BSIT 2-3</p>
-            <p><span>Date of Birth:</span> 2001-07-05</p>
-            <p><span>Age:</span> 23</p>
-            <p><span>Sex:</span> Male</p>
-            <p><span>Emergency Phone:</span> 093838</p>
-            <p><span>Emergency Email:</span> jayson.combate05@gmail.com</p>
-            <p><span>Health Condition:</span> Good</p>
-            <p><span>Medication Name:</span> Jazzy</p>
-            <p><span>Prescriber:</span> Medika</p>
-            <p><span>Date of Visit:</span> 2024-12-19</p>
+            <p>Student ID: {{ patient.student_number }}</p>
+            <p>Full Name: {{ patient.name }}</p>
+            <p>Course/Section: {{ patient.cys }}</p>
+            <p>Date of Birth: {{ patient.dob }}</p>
+            <p>Age: {{ patient.age }}</p>
+            <p>Sex: {{ patient.sex }}</p>
+            <p>Emergency Phone: {{ patient.emergency_phone }}</p>
+            <p>Emergency Email: {{ patient.emergency_email }}</p>
+            <p>Health Condition: {{ patient.health_condition }}</p>
+            <p>Medication Name: {{ patient.medication_name }}</p>
+            <p>Prescriber: {{ patient.prescriber }}</p>
+            <p>Date of Visit: {{ patient.visit_date }}</p>       
         </div>
         <a href="{{ url_for('generate_pdf', student_number=patient.student_number) }}" class="save-pdf-button">Save as PDF</a>
     </div>

@@ -405,68 +405,72 @@
 
     <div class="main">
         <div class="main-content">
-            <h1>STUDENT INFORMATION</h1>
+            <h1>Update Patient Information</h1>
             <form method="POST" class="patient-form">
                 <div>
                     <label>Student Number:</label>
-                    <input type="text" name="student_number" required>
+                    <input type="text" id="student_number" name="student_number" value="{{ patient['student_number'] }}" readonly required>
                 </div>
                 <div>
                     <label>Course/Year/Section:</label>
-                    <input type="text" name="cys" required>
-                </div>
-                <div>
-                    <label>Date of Visit:</label>
-                    <input type="date" name="visit_date" required>
+                    <input type="text" id="cys" name="cys" value="{{ patient['cys'] }}" required>
                 </div>
                 <div>
                     <label>Last Name:</label>
-                    <input type="text" name="last_name" required>
+                    <input type="text" id="last_name" name="last_name" value="{{ patient['name'].split(' ')[-1] }}" required>
                 </div>
                 <div>
                     <label>First Name:</label>
-                    <input type="text" name="first_name" required>
+                    <input type="text" id="first_name" name="first_name" value="{{ patient['name'].split(' ')[0] }}" required>
                 </div>
                 <div>
                     <label>Middle Initial:</label>
-                    <input type="text" name="middle_initial" required>
+                    <input type="text" id="middle_initial" name="middle_initial" value="{{ patient['name'].split(' ')[1] if patient['name'].split(' ')|length > 1 else '' }}" required>
                 </div>
                 <div>
                     <label>Date of Birth:</label>
-                    <input type="date" name="dob" required>
+                    <input type="date" id="dob" name="dob" value="{{ patient['dob'] }}" required>
                 </div>
                 <div>
                     <label>Age:</label>
-                    <input type="number" name="age" required>
+                    <input type="number" id="age" name="age" value="{{ patient['age'] }}" required>
                 </div>
                 <div>
                     <label>Sex:</label>
-                    <input type="text" name="sex" required>
+                    <select id="sex" name="sex" required>
+                        <option value="Male" {% if patient['sex'] == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if patient['sex'] == 'Female' %}selected{% endif %}>Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Emergency Phone:</label>
+                    <input type="text" id="emergency_phone" name="emergency_phone" value="{{ patient['emergency_phone'] }}" required>
+                </div>
+                <div>
+                    <label>Emergency Email:</label>
+                    <input type="email" id="emergency_email" name="emergency_email" value="{{ patient['emergency_email'] }}" required>
                 </div>
                 <div>
                     <label>Health Condition:</label>
-                    <input type="text" name="health_condition" required>
+                    <input type="text" id="health_condition" name="health_condition" value="{{ patient['health_condition'] }}" required>
                 </div>
                 <div>
                     <label>Medication Name:</label>
-                    <input type="text" name="medication_name" required>
+                    <input type="text" id="medication_name" name="medication_name" value="{{ patient['medication_name'] }}" required>
                 </div>
                 <div>
                     <label>Prescriber:</label>
-                    <input type="text" name="prescriber" required>
+                    <input type="text" id="prescriber" name="prescriber" value="{{ patient['prescriber'] }}" required>
                 </div>
                 <div>
-                    <label>Emergency Contact:</label>
-                    <input type="text" name="emergency_contact" required>
+                    <label>Visit Date:</label>
+                    <input type="date" id="visit_date" name="visit_date" value="{{ patient['visit_date'] }}" required>
                 </div>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" name="emergency_email" required>
-                </div>
-                <button type="submit" class="add-button">Add Patient</button>
+                <button type="submit" class="add-button">Save Updates</button>
             </form>
         </div>
     </div>
+    
 
 
     <script>
