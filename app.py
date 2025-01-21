@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from io import BytesIO
 import os
+from datetime import timedelta
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from flask import send_file
@@ -348,6 +349,14 @@ def generate_pdf(student_number):
     return send_file(buffer, as_attachment=True, download_name=f"{patient['name']}_details.pdf", mimetype="application/pdf")
 
 
+
+
+# Set session lifetime to 2 minutes
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
+
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
 
 
 if __name__ == '__main__':

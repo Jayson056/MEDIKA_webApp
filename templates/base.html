@@ -11,3 +11,25 @@
     </div>
 </body>
 </html>
+
+
+
+
+<script>
+    // Function to check the session status periodically
+    function checkSession() {
+        fetch('/check-session', {
+            method: 'GET',
+            credentials: 'include' // Include cookies for session validation
+        })
+        .then(response => {
+            if (response.status === 401) { // Session timeout (unauthorized)
+                window.location.href = '/'; // Redirect to home page
+            }
+        })
+        .catch(error => console.error('Error checking session:', error));
+    }
+
+    // Check session status every 10 seconds (10000ms)
+    setInterval(checkSession, 10000);
+</script>

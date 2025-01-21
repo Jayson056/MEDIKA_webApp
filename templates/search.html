@@ -373,7 +373,101 @@
         }, 2300);
     }
 
-
 </script>
+
+
+<script>
+    // Timers for warning and auto logout
+    let warningTimer;
+    let logoutTimer;
+
+    // Define inactivity time (2 minutes total)
+    const inactivityLimit = 600000; // 10 minutes in milliseconds
+    const warningDuration = 30000; // 30 seconds before logout
+
+    // Flag to track if the warning message is visible
+    let isWarningVisible = false;
+
+    // Reset timers on user interaction
+    function resetTimers() {
+        console.log("Activity detected. Resetting timers...");
+
+        // Clear any existing timers
+        clearTimeout(warningTimer);
+        clearTimeout(logoutTimer);
+
+        // If the warning message is visible, remove it
+        if (isWarningVisible) {
+            hideWarning();
+        }
+
+        // Set the warning timer (2 minutes - 10 seconds)
+        warningTimer = setTimeout(() => {
+            showWarning();
+        }, inactivityLimit - warningDuration);
+
+        // Set the logout timer (2 minutes)
+        logoutTimer = setTimeout(() => {
+            autoLogout();
+        }, inactivityLimit);
+    }
+
+    // Show the warning message
+    function showWarning() {
+        console.log("Showing warning message...");
+        isWarningVisible = true; // Set the flag to true
+
+        // Create and display the warning message
+        const warningMessage = document.createElement("div");
+        warningMessage.id = "warningMessage";
+        warningMessage.textContent =
+            "You will be logged out due to inactivity in 10 seconds. Interact to stay logged in.";
+        warningMessage.style.position = "fixed";
+        warningMessage.style.bottom = "20px";
+        warningMessage.style.left = "50%";
+        warningMessage.style.transform = "translateX(-50%)";
+        warningMessage.style.backgroundColor = "#fbc02d"; // Yellow warning color
+        warningMessage.style.color = "black";
+        warningMessage.style.padding = "10px 20px";
+        warningMessage.style.borderRadius = "5px";
+        warningMessage.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+        warningMessage.style.zIndex = "10000";
+
+        document.body.appendChild(warningMessage);
+    }
+
+    // Hide the warning message
+    function hideWarning() {
+        console.log("Hiding warning message...");
+        isWarningVisible = false; // Set the flag to false
+
+        // Remove the warning message if it exists
+        const warningMessage = document.getElementById("warningMessage");
+        if (warningMessage) {
+            document.body.removeChild(warningMessage);
+        }
+    }
+
+    // Automatically log out the user
+    function autoLogout() {
+        console.log("Logging out due to inactivity...");
+
+        // Remove the warning message if it exists
+        hideWarning();
+
+        // Redirect to the home page (logout)
+        window.location.href = "/logout";
+    }
+
+    // Add event listeners for user activity (mousemove, keydown, scroll, etc.)
+    document.addEventListener("mousemove", resetTimers);
+    document.addEventListener("keydown", resetTimers);
+    document.addEventListener("click", resetTimers);
+    document.addEventListener("scroll", resetTimers);
+
+    // Initialize the timers when the page loads
+    resetTimers();
+</script>
+
 </body>
 </html>
