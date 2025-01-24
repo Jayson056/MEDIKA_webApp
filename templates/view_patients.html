@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap">
     <title>Patient Dashboard</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
+
+          body {
+            font-family: 'Poppins', Helvetica;
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,16 +20,18 @@
        /* sidebar.css */
        .sidebar {
             width: 200px;
-            margin-left: -5px;
             margin-right: 500px;
-            background-color: #0066CC;
+            background-image: linear-gradient(#003f8f, #1c68cb);
+            font-family: 'Fredoka';
+            font-weight: 650;
+            letter-spacing: 1.4px;
             color: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 60px;
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
+            padding: 40px;
+            border-top-right-radius: 45px;
+            border-bottom-right-radius: 45px;
             transition: width 0.3s ease-in-out;
             animation: slideIn 0.5s ease-out; /* Animation to slide in sidebar */
         }
@@ -53,19 +59,25 @@
 
         /* Hover effect */
         .sidebar a:hover {
-            background-color: #004C8C;
-            border-radius: 5px;
+            height: 15%;
+            width: 95%;
+            background-color: #fff;
+            -webkit-text-fill-color: #1c68cb;
+            border-radius: 15px;
             padding: 10px;
-            transform: scale(1.05); /* Slightly enlarge the link on hover */
+            transform: scale(1); /* Slightly enlarge the link on hover */
         }
 
         /* Active link styles */
         .sidebar a.active {
-            background-color: #efefef6f;
-            border-radius: 5px;
-            width: 235px;
+            height: 15%;
+            width: 95%;
+            background-color: #fff;
+            -webkit-text-fill-color: #1c68cb;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
             padding: 10px;
-            transform: scale(1.05); /* Slightly enlarge the active link */
+            transform: scale(1.3); /* Slightly enlarge the link on hover */
         }
 
         /* Profile section styling */
@@ -149,10 +161,6 @@
 
         /* Dropdown menu animation */
       /* Dropdown menu container */
-
-
-
-
 
 
 .dropdown {
@@ -295,12 +303,16 @@
   border-radius: 50%;
 }
 
+.logo container {
+    float: right;
+}
 .main {
             flex-grow: 1;
             padding: 20px;
         }
 
         .main h1 {
+            font-family: 'Fredoka';
             color: #0056D2;
             margin-bottom: 20px;
         }
@@ -340,8 +352,24 @@
             background-color: #0056D2;
         }
 
+        .actions .edit-link:hover {
+            background: #23c483;;
+            background-color: #23c483;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
         .actions .delete-link {
             background-color: #FF4D4D;
+        }
+
+        .actions .delete-link:hover {
+            background: #c4232b;;
+            background-color: #ff1154;
+            box-shadow: 0px 15px 20px rgba(229, 46, 46, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
         }
     </style>
 </head>
@@ -349,13 +377,13 @@
     <div class="sidebar">
         <div>
             <a href="add" id="addPatient">
-                <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
+                <img src="{{ url_for('static', filename='assets/add-patient.png') }}" alt="Add Icon"> Add Patient
             </a>
             <a href="view" id="viewPatients" class="active">
-                <img src="{{ url_for('static', filename='assets/view_all.png') }}" alt="View Icon"> View All Patient Record
+                <img src="{{ url_for('static', filename='assets/view-all.png') }}" alt="View Icon"> View All Patient Record
             </a>
             <a href="search" id="searchPatients">
-                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
+                <img src="{{ url_for('static', filename='assets/search-record.png') }}" alt="Search Icon"> Search Patient Record
             </a>
         </div>
         <div>
@@ -370,7 +398,7 @@
     </div>
 
     <div class="dropdown">
-        <img src="{{ url_for('static', filename='assets/arrowdown.png') }}" alt="Dropdown Arrow" 
+        <img src="{{ url_for('static', filename='assets/arrow-down.png') }}" alt="Dropdown Arrow" 
              onclick="toggleDropdown()"> 
         <div class="dropdown-content">
             <a href="#" onclick="openOverlay()">Upload Profile</a>
