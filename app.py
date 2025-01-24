@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from io import BytesIO
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from datetime import timedelta
 from reportlab.lib.pagesizes import letter
@@ -87,19 +88,22 @@ def write_patients(patients):
 CREDENTIALS_FILE = 'credentials.txt'
 
 # Function to read users from the credentials file (Plain text passwords)
+# Function to read users from the credentials file
 def read_users():
     users = {}
     try:
-        with open(CREDENTIALS_FILE, 'r') as file:
+        with open('credentials.txt', 'r') as file:
             for line in file:
                 line = line.strip()
                 if line:  # Skip empty lines
                     parts = line.split(',')
-                    if len(parts) == 2:  # Ensure correct format
-                        username, password = parts
-                        users[username] = password  # Store plain text password
+                    if len(parts) == 2:  # Only process lines with exactly two values
+                        username, password_hash = parts
+                        users[username] = password_hash
+                    else:
+                        print(f"Skipping invalid line: {line}")  # Log invalid lines
     except FileNotFoundError:
-        print(f"Error: '{CREDENTIALS_FILE}' not found.")
+        pass  # If the file doesn't exist yet
     return users
 
 # Function to find the patient by student number
@@ -109,6 +113,43 @@ def get_patient_by_student_number(student_number):
         if patient['student_number'] == student_number:
             return patient
     return None  # Return None if patient is not found
+
+
+
+def save_user(username, password_hash):
+    with open('credentials.txt', 'a') as file:
+        file.write(f"{username},{password_hash}\n")
+
+
+# Registration Page (GET and POST)
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        # Check if passwords match
+        if password != confirm_password:
+            return render_template('register.html', error="Passwords do not match.")
+
+        users = read_users()
+
+        # Check if username already exists
+        if username in users:
+            return render_template('register.html', error="Username already exists.")
+
+        # Save new user
+        password_hash = generate_password_hash(password)
+        save_user(username, password_hash)
+
+        return redirect(url_for('home'))
+
+    # Render registration page for GET request
+    return render_template('register.html')
+
+
+
 
 
 # Home route to render home.html
@@ -121,16 +162,25 @@ def home():
         # Read users from the credentials file
         users = read_users()
 
-        # Validate username and password (plain text comparison)
-        if username not in users or users[username] != password:
-            flash("Invalid username or password.", "error")
-            return render_template('home.html')
+        # Validate username and password (hashed password comparison)
+        if username not in users or not check_password_hash(users[username], password):
+            # Return a JSON response indicating failure (wrong credentials)
+            return jsonify({'success': False, 'error_message': 'Invalid username or password.'})
 
         # Store the user in the session and redirect to dashboard
         session['username'] = username
-        return redirect(url_for('dashboard'))
+        return jsonify({'success': True})
 
     return render_template('home.html')
+
+
+
+
+
+
+
+
+
 
 # Dashboard route for logged-in users
 @app.route('/dashboard')

@@ -26,11 +26,52 @@
                 <span class="bar"></span>
             </div>
             <div class="login-container">
-                <input type="text" placeholder="User ID" id="username" class="login-input">
-                <input type="password" placeholder="Password" id="password" class="login-input">
-                <button class="login-button" onclick="loginUser()">Log In</button>
-            </div>
-            <p id="error-message" class="error-message" >Invalid username or password.</p>
+              <form id="loginForm" method="POST">
+                  <input type="text" placeholder="User ID" id="username" name="username" class="login-input" required>
+                  <input type="password" placeholder="Password" id="password" name="password" class="login-input" required>
+                  <button type="submit" class="login-button">Log In</button>
+              </form>
+          </div>
+          <p id="error-message" class="error-message" style="display: none;">Invalid username or password.</p>
+          
+          <script>
+          document.getElementById('loginForm').addEventListener('submit', function(event) {
+              event.preventDefault();  // Prevent form submission
+          
+              const username = document.getElementById('username').value;
+              const password = document.getElementById('password').value;
+          
+              // Perform AJAX request (fetch)
+              fetch('/', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',  // Standard form submission format
+                  },
+                  body: new URLSearchParams({
+                      'username': username,
+                      'password': password
+                  })
+              })
+              .then(response => response.json())  // Parse JSON response
+              .then(data => {
+                  if (data.success) {
+                      // If login is successful, redirect to the dashboard
+                      window.location.href = '/dashboard';  // Redirect to the dashboard
+                  } else {
+                      // If login fails, show the error message
+                      document.getElementById('error-message').style.display = 'block';
+                      document.getElementById('error-message').innerText = data.error_message;  // Show the error message
+                  }
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+                  // Handle any errors
+                  document.getElementById('error-message').style.display = 'block';
+                  document.getElementById('error-message').innerText = 'An unexpected error occurred. Please try again.';
+              });
+          });
+          </script>
+          
         </nav>
     </header>
 
@@ -48,45 +89,7 @@
         </div>
     </section>    
 
-    <script>
-        function loginUser() {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-
-            // Send a POST request to the backend with username and password
-            fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username: username, password: password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = '/dashboard';  // Redirect to dashboard on success
-                } else {
-                    document.getElementById("error-message").style.display = "block";  // Show error message
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                window.location.href = '/login';
-            });
-        }
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
