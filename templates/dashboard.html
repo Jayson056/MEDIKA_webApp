@@ -324,21 +324,24 @@
         /* Dropdown menu animation */
       /* Dropdown menu container */
 
+        /* Dropdown menu animation */
+      /* Dropdown menu container */
+
       .dropdown {
-    position: absolute;
-    top: 87.3%; /* This ensures the dropdown appears below the profile */
-    left: 8%; /* Centers the dropdown relative to the profile */
+    position: fixed;
+    top: 85%; /* This ensures the dropdown appears below the profile */
+    right: 90%; /* Centers the dropdown relative to the profile */
     transform: translateX(-50%); /* Corrects the positioning to truly center */
     margin-top: 10px; /* Adds some space between the profile and the dropdown */
     animation: fadeIn 0.5s ease-in-out;
 }
 
-
 /* Dropdown icon (arrow) */
 .dropdown img {
+    filter: brightness(0) invert(1);
     cursor: pointer;
     width: 40px;
-    height: 20px;
+    height: 15px;
     transition: transform 0.3s ease;
 }
 
@@ -351,8 +354,7 @@
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 50%;
-            min-width: 150px;
+            min-width: 120px;
             box-shadow: 3px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 99;
             bottom: 100%; /* Position the dropdown below the profile image */
@@ -363,11 +365,11 @@
         }
 
         .dropdown-content a {
-            text-align: center;
-            color: black;
-            padding: 1px 6px;
+            color: #1c68cb;
+            font-family: 'Poppins';
+            padding: 5px 10px;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .dropdown.show .dropdown-content {
@@ -385,6 +387,7 @@
                 transform: translateY(0); /* End in normal position */
             }
         }
+
 
         .overlay {
             display: none;
