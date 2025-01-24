@@ -1,32 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard</title>
-    <style>
-          body {
-            font-family: Arial, sans-serif;
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap">
+        <title>Search Patient</title>
+        
+<style>
+
+    
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
+
+.background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.background span {
+    width: 41vmin;
+    height: 41vmin;
+    border-radius: 41vmin;
+    backface-visibility: hidden;
+    position: absolute;
+    animation: move;
+    animation-duration: 36;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.background span:nth-child(0) {
+    color: #42c6ff;
+    top: 97%;
+    left: 90%;
+    animation-duration: 107s;
+    animation-delay: -10s;
+    transform-origin: -9vw 12vh;
+    box-shadow: -82vmin 0 10.34832417211658vmin currentColor;
+}
+.background span:nth-child(1) {
+    color: #2c88dd;
+    top: 57%;
+    left: 7%;
+    animation-duration: 20s;
+    animation-delay: -45s;
+    transform-origin: -11vw 9vh;
+    box-shadow: -82vmin 0 10.33167063929595vmin currentColor;
+}
+.background span:nth-child(2) {
+    color: #2c88dd;
+    top: 40%;
+    left: 28%;
+    animation-duration: 14s;
+    animation-delay: -19s;
+    transform-origin: -5vw 2vh;
+    box-shadow: 82vmin 0 10.66549557843994vmin currentColor;
+}
+.background span:nth-child(3) {
+    color: #2c88dd;
+    top: 82%;
+    left: 41%;
+    animation-duration: 67s;
+    animation-delay: -17s;
+    transform-origin: -15vw 21vh;
+    box-shadow: -82vmin 0 10.382910011323801vmin currentColor;
+}
+.background span:nth-child(4) {
+    color: #2c88dd;
+    top: 83%;
+    left: 71%;
+    animation-duration: 20s;
+    animation-delay: -88s;
+    transform-origin: -19vw 2vh;
+    box-shadow: 82vmin 0 10.280036995342682vmin currentColor;
+}
+.background span:nth-child(5) {
+    color: #2c88dd;
+    top: 13%;
+    left: 40%;
+    animation-duration: 118s;
+    animation-delay: -110s;
+    transform-origin: 23vw 20vh;
+    box-shadow: 82vmin 0 11.182720660437111vmin currentColor;
+}
+.background span:nth-child(6) {
+    color: #2c88dd;
+    top: 59%;
+    left: 90%;
+    animation-duration: 14s;
+    animation-delay: -89s;
+    transform-origin: 20vw -12vh;
+    box-shadow: -82vmin 0 10.645350549352743vmin currentColor;
+}
+.background span:nth-child(7) {
+    color: #42c6ff;
+    top: 34%;
+    left: 26%;
+    animation-duration: 14s;
+    animation-delay: -53s;
+    transform-origin: 23vw -24vh;
+    box-shadow: 82vmin 0 10.873817257388088vmin currentColor;
+}
+.background span:nth-child(8) {
+    color: #42c6ff;
+    top: 46%;
+    left: 69%;
+    animation-duration: 6s;
+    animation-delay: -9s;
+    transform-origin: 20vw 18vh;
+    box-shadow: -82vmin 0 10.92407042836501vmin currentColor;
+}
+.background span:nth-child(9) {
+    color: #2c88dd;
+    top: 48%;
+    left: 10%;
+    animation-duration: 120s;
+    animation-delay: -1s;
+    transform-origin: -7vw -16vh;
+    box-shadow: -82vmin 0 11.010560356829707vmin currentColor;
+}
+.background span:nth-child(10) {
+    color: #42c6ff;
+    top: 38%;
+    left: 1%;
+    animation-duration: 32s;
+    animation-delay: -54s;
+    transform-origin: -19vw 6vh;
+    box-shadow: 82vmin 0 10.400310355687427vmin currentColor;
+}
+.background span:nth-child(11) {
+    color: #42c6ff;
+    top: 23%;
+    left: 20%;
+    animation-duration: 74s;
+    animation-delay: -48s;
+    transform-origin: -10vw 11vh;
+    box-shadow: 82vmin 0 11.127710594575198vmin currentColor;
+}
+.background span:nth-child(12) {
+    color: #42c6ff;
+    top: 5%;
+    left: 72%;
+    animation-duration: 112s;
+    animation-delay: -91s;
+    transform-origin: 16vw -20vh;
+    box-shadow: 82vmin 0 10.303554276807432vmin currentColor;
+}
+.background span:nth-child(13) {
+    color: #2c88dd;
+    top: 19%;
+    left: 85%;
+    animation-duration: 70s;
+    animation-delay: -128s;
+    transform-origin: 11vw -16vh;
+    box-shadow: 82vmin 0 10.941199561718795vmin currentColor;
+}
+
+
+        body {
+            font-family: 'Poppins', Helvetica;
             margin: 0;
             padding: 0;
             display: flex;
             height: 100vh;
         }
-     /* sidebar.css */
-     .sidebar {
+
+               /* Medika icon section styling */
+            
+        .medika-logo {
+            width: auto;
+            opacity: 1.2;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out; /* Profile fade-in effect */
+        }
+
+        .medika-logo img {
+            margin-left: 690%;
+            margin-top: 30px;
+            width: 50px;
+            border-radius: 5%;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .medika-logo img:hover {
+            transform: scale(1.1); /* Profile image grows on hover */
+        }
+
+        .medika-logo span {
+            margin-top: 5px;
+            display: block;
+            font-weight: bold;
+        }
+
+/* sidebar.css */
+        .sidebar {
             width: 200px;
-            margin-left: -5px;
             margin-right: 500px;
-            background-color: #0066CC;
+            background-image: linear-gradient(#003f8f, #1c68cb);
+            font-family: 'Fredoka';
+            font-weight: 650;
+            letter-spacing: 1.4px;
             color: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 60px;
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
+            padding: 40px;
+            border-top-right-radius: 45px;
+            border-bottom-right-radius: 45px;
             transition: width 0.3s ease-in-out;
             animation: slideIn 0.5s ease-out; /* Animation to slide in sidebar */
+            z-index: 1;
         }
 
         .sidebar a {
@@ -50,23 +243,39 @@
             transition: transform 0.3s ease;
         }
 
+        .sidebar-img.hover {
+            display: none;
+        }
+        
+        a:hover .sidebar-img.default {
+            display: none;
+        }
+        
+        a:hover .sidebar-img.hover {
+            display: inline;
+        }
+
+
         /* Hover effect */
         .sidebar a:hover {
-            background-color: #004C8C;
-            border-radius: 5px;
+            width: 80%;
+            background-color: #fff;
+            -webkit-text-fill-color: #1c68cb;
+            border-radius: 20px;
             padding: 10px;
-            transform: scale(1.05); /* Slightly enlarge the link on hover */
+            transform: scale(1.3); /* Slightly enlarge the link on hover */
         }
 
         /* Active link styles */
         .sidebar a.active {
-            background-color: #efefef6f;
+            background-color: #fff;
             border-radius: 5px;
             width: 235px;
             padding: 10px;
             transform: scale(1.05); /* Slightly enlarge the active link */
         }
 
+        
         /* Profile section styling */
         .profile {
             width: auto;
@@ -90,8 +299,6 @@
             display: block;
             font-weight: bold;
         }
-
-
 
  /* Medika icon section styling */
  .medika-logo {
@@ -121,9 +328,6 @@
         }
 
 
-
-
-
         /* Animation for the sidebar */
         @keyframes slideIn {
             0% {
@@ -146,78 +350,6 @@
             }
         }
 
-        /* Dropdown menu animation */
-      /* Dropdown menu container */
-
-
-
-
-
-
-.dropdown {
-    position: absolute;
-    top: 87.3%; /* This ensures the dropdown appears below the profile */
-    left: 8%; /* Centers the dropdown relative to the profile */
-    transform: translateX(-50%); /* Corrects the positioning to truly center */
-    margin-top: 10px; /* Adds some space between the profile and the dropdown */
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Dropdown icon (arrow) */
-.dropdown img {
-    cursor: pointer;
-    width: 40px;
-    height: 20px;
-    transition: transform 0.3s ease;
-}
-
-.dropdown img:hover {
-    transform: rotate(180deg); /* Rotate the arrow on hover */
-}
-
-
-
-
-
-
-        /* Dropdown content */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 120px;
-            box-shadow: 3px 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 99;
-            top: 100%; /* Position the dropdown below the profile image */
-            left: 0;
-            border-radius: 8px;
-            overflow: hidden;
-            animation: slideDown 0.3s ease-in-out; /* Dropdown slide-in animation */
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .dropdown.show .dropdown-content {
-            display: block;
-        }
-
-        /* Animation for dropdown */
-        @keyframes slideDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px); /* Start from above */
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0); /* End in normal position */
-            }
-        }
-
         .overlay {
             display: none;
             position: fixed;
@@ -229,6 +361,7 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            
         }
 
         .upload-box {
@@ -264,17 +397,19 @@
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
         }
 
-     
-
-            .content {
+            
+        .content {
             flex: 1;
             border-radius: 15px 0 0 15px;
             margin: auto;
+            z-index: 1;
         }
 
         .content h2 {
+            font-family: 'Fredoka';
             margin-left: -500px;
             color: #1e73be;
             font-size: 24px;
@@ -294,7 +429,7 @@
         .save-pdf-button {
             display: inline-block;
             margin-top: 20px;
-            background-color: #1e73be;
+            background-image: linear-gradient(#003f8f, #1c68cb);
             color: #fff;
             padding: 10px 20px;
             text-align: center;
@@ -306,7 +441,11 @@
         }
 
         .save-pdf-button:hover {
-            background-color: #155a91;
+            background: #23c483;;
+            background-color: #23c483;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
         }
 
         .back-link {
@@ -321,14 +460,14 @@
             text-decoration: underline;
         }
 
-        .dots {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 10px);
-  grid-gap: 5px;
-}
+.dots {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 10px);
+    grid-gap: 5px;
+    }
 .dots span {
   width: 10px;
   height: 10px;
@@ -338,18 +477,42 @@
     </style>     
 </head>
 <body>
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+     </div>
+
     <div class="sidebar">
         <div>
             <a href="add" id="addPatient">
-                <img src="{{ url_for('static', filename='assets/add.png') }}" alt="Add Icon"> Add Patient
+                <img src="{{ url_for('static', filename='assets/add-patient.png') }}" class="sidebar-img default" alt="Add Patient">
+                <img src="{{ url_for('static', filename='assets/add-hover.png') }}" class="sidebar-img hover" alt="Add Patient">
+                Add Patient
             </a>
             <a href="view" id="viewPatients">
-                <img src="{{ url_for('static', filename='assets/view_all.png') }}" alt="View Icon"> View All Patient Record
+                <img src="{{ url_for('static', filename='assets/view-all.png') }}" class="sidebar-img default" alt="View Icon">
+                <img src="{{ url_for('static', filename='assets/view-hover.png') }}" class="sidebar-img hover" alt="View Icon">
+                View All Patient Record
             </a>
             <a href="search" id="searchPatients">
-                <img src="{{ url_for('static', filename='assets/search.png') }}" alt="Search Icon"> Search Patient Record
+                <img src="{{ url_for('static', filename='assets/search-record.png') }}" class="sidebar-img default" alt="Search Icon"> 
+                <img src="{{ url_for('static', filename='assets/search-hover.png') }}" class="sidebar-img hover" alt="Search Icon">
+                Search Patient Record
             </a>
         </div>
+
         <div>
             <div class="profile">
                 <img src="{{ url_for('static', filename='assets/ICON/' + username + '.png') }}" 
@@ -358,15 +521,6 @@
                      alt="Profile Icon">
                 <span>{{ username }}</span>
             </div>
-        </div>
-    </div>
-
-    <div class="dropdown">
-        <img src="{{ url_for('static', filename='assets/arrowdown.png') }}" alt="Dropdown Arrow" 
-             onclick="toggleDropdown()"> 
-        <div class="dropdown-content">
-            <a href="#" onclick="openOverlay()">Upload Profile</a>
-            <a href="logout">Sign Out</a>
         </div>
     </div>
 
@@ -381,10 +535,8 @@
         </div>
     </div>
 
-
-   
     <div class="medika-logo">
-        <img src="{{ url_for('static', filename='assets/medika-logo.png') }}" alt="Add Icon">
+        <img src="{{ url_for('static', filename='assets/medika-circle.png') }}" alt="Add Icon">
     </div>
 
     <div class="content">
