@@ -1,2 +1,1 @@
-098765,Jayson Apable Combate,bsit 2-3,2001-07-05,23,Male,84374546,jaysonc864@gmail.com,Healthy,Consultation,Medika,2025-01-02
-pyne,ds fgfg fgfg,COMPROG_3,2025-01-24,34,male,093985,FGHFGH@GMAIL,puyat,sample,MEDIKA,2025-01-24
+
